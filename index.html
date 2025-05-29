@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>portfolio</title>
+    <style>
+    @import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap');
+    </style>
+    <style>
+    @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap');
+    </style>
+    <link rel="stylesheet" href="./index.css">
+</head>
+<body>
+    <!--loader..dont touch this part-->
+    <div class="loader">
+        <h1 class="counter">0</h1>
+            <div class="overlay">
+            <div class="bar"></div>
+            <div class="bar"></div>
+            <div class="bar"></div>
+            <div class="bar"></div>
+            <div class="bar"></div>
+            <div class="bar"></div>
+            <div class="bar"></div>
+            <div class="bar"></div>
+            <div class="bar"></div>
+            <div class="bar"></div>
+        </div>
+    </div>
+    <!--main content-->
+    <section id="home" > 
+        <!-- Navigation bar -->
+            <nav id="desktop_nav">
+                <div>
+                    <ul class="nav-links">
+                        <li><a href="#home">home</a></li>
+                        <li><a href="#skills">skills</a></li>
+                        <li><a href="#project">projects</a></li>
+                    </ul>
+                </div>
+            </nav>
+        <!--nav bar hamburger-->
+        <header class="nav-container">
+            <nav id="hamburger">
+                <div id="hamburger-menu">
+                    <div class="hamburger-icon" onclick="toggleMenu()">
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                    </div>
+                    <div class="menu-links">
+                        <li><a href="#home" onclick="toggleMenu()">home</a></li>
+                        <li><a href="#skills" onclick="toggleMenu()">skills</a></li>
+                        <li><a href="#project" onclick="toggleMenu()">projects</a></li>
+                    </div>
+                </div>
+            </nav>
+        </header>
+
+        <!-- Header section -->
+        <div class="header">
+            <div class="header-text">
+                <p class="p1">Hey, I'm</p>
+                <div class="name">
+                    <div class="h1">s</div>
+                    <div class="h1">h</div>
+                    <div class="h1">a</div>
+                    <div class="h1">y</div>
+                    <div class="h1">a</div>
+                    <div class="h1">n</div>
+                    <div class="h1">n</div>
+                    <div class="h1">a</div>
+                    <div class="h1"><span>.</span></div>
+                </div>
+                <p class="p1">web developer |  ML dev</p>
+                <p class="p2">I design and develop custom web interfaces, optimize backend workflows,
+                    and occasionally dabble in AI projects. With a strong foundation in modern tech stacks and a 
+                    curiosity-led mindset, I help startups and businesses bring ideas to life — with performance, 
+                    design, and users in mind.
+                </p>
+                <div>
+                    <ul class="links">
+                        <li><a onclick="window.open('./asset/cv.pdf')">resume</a></li>
+                        <li><a href="#contact">contact</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="skills" >
+        <div class="section-text">
+                <p class="tagline">explore my</p>
+                <h1 class="categories">skills</h1>
+        </div>  
+        <div class="skills-wrapper">
+            <div class="skill-box">
+                <h3>Frontend</h3>
+                <ul>
+                    <li>HTML</li>
+                    <li>CSS</li>
+                    <li>JavaScript</li>
+                    <li>React</li>
+                    <li>Tailwind CSS</li>
+                    </ul>
+            </div>
+
+            <div class="skill-box">
+                <h3>Machine Learning</h3>
+                <ul>
+                    <li>Python</li>
+                    <li>Pandas & NumPy</li>
+                    <li>Scikit-learn</li>
+                    <li>Model Evaluation</li>
+                    <li>Data Preprocessing</li>
+                </ul>
+            </div>
+
+            <div class="skill-box">
+                <h3>Tools</h3>
+                <ul>
+                    <li>Git & GitHub</li>
+                    <li>VS Code</li>
+                    <li>Figma</li>
+                    <li>Canva</li>
+                    <li>Notion</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <section id="project">
+        <div class="banner">
+            <div class="slider" style="--quantity: 4">
+                <a href="https://www.youtube.com/" target="_blank" class="item" style="--position:1"><img src="./img/1.jpg" alt="project 1" /></a>
+                <a href="https://www.youtube.com/" target="_blank" class="item" style="--position:2"><img src="./img/2.jpg" alt="project 1" /></a>
+                <a href="https://www.youtube.com/" target="_blank" class="item" style="--position:3"><img src="./img/3.jpg" alt="project 1" /></a>
+                <a href="https://www.youtube.com/" target="_blank" class="item" style="--position:4"><img src="./img/4.png" alt="project 1" /></a>
+            </div>
+            <div class="project-label">
+                <h1>things I've built<span>.</span></h1>
+                <h2>web designs & ML projects</h2>
+            </div>
+        </div>
+    </section>
+    
+    <section id="contact" class="contact-section">
+        <div class="glass-wrapper">
+            <div class="glass-card" id="glassCard">
+                <h2>let’s work together<span>!</span></h2>
+                <p>I’m available for freelance, internships, and creative collabs. Reach out via your favorite platform below.</p>
+                <div class="icon-links">
+                    <a href="mailto:shayannabehera@gmail.com" title="Email" target="_blank"><img src="./img/email.png" alt="Email icon" /></a>
+                    <a href="https://www.linkedin.com/in/shayanna-behera-804902308/" target="_blank" title="LinkedIn"><img src="./img/linkedin.png" alt="LinkedIn icon" /></a>
+                    <a href="https://github.com/shayannab" target="_blank" title="GitHub"><img src="./img/gitbub.png" alt="GitHub icon" /></a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+            <nav> 
+                <div>
+                    <ul class="links">
+                        <li><a href="#home">home</a></li>
+                        <li><a href="#skills">skills</a></li>
+                        <li><a href="#project">projects</a></li>
+                        </ul>
+                </div>
+            </nav>
+            <p>&#169; 2024 Copyright: Shayanna Behera</p>
+        </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3/dist/gsap.min.js"></script>
+    <script>
+    function startLoader(){
+        let counterElement= document.querySelector('.counter');
+        let currentValue=0;
+
+        function updateCounter(){
+            if (currentValue ===100){
+                return;
+            }
+
+            currentValue+= Math.floor(Math.random() * 10) +1;
+
+            if(currentValue>100){
+                currentValue=100;
+            }
+
+            counterElement.textContent=currentValue;
+
+            let delay=Math.floor(Math.random()*200)+50;
+            setTimeout(updateCounter, delay);
+        }
+        updateCounter();
+    }
+    startLoader();
+    gsap.to(".counter",0.25,{
+        delay:3.5, opacity:0
+    });
+
+    gsap.to(".bar", 1.5,{
+        delay:3.5, height:0, stagger:{
+            amount:0.5,
+        },
+        ease:"power4.inOut",
+    });
+
+    gsap.from(".h1",1.5,{
+        delay:4,
+        y:700,
+        stagger:{
+            amount:0.5,
+        },
+        ease:"power4.inOut",
+    });
+
+    gsap.from(".hero", 2,{
+        delay:4.5,y:400,
+        ease:"power4.inOut",
+    });
+
+    gsap.to(".loader", {
+    delay: 5.5, // wait till all animations are done
+    opacity: 0,
+    display: "none",
+    onComplete: () => {
+        // Unlock scroll after loader is gone
+        document.body.style.overflow = "auto";
+    }
+});
+
+function toggleMenu(){
+    const menu= document.querySelector('.menu-links');
+    const icon= document.querySelector('.hamburger-icon');
+    menu.classList.toggle('open');
+    icon.classList.toggle('open');
+}
+
+const card = document.getElementById("glassCard");
+
+card.addEventListener("mousemove", (e) => {
+    const cardRect = card.getBoundingClientRect();
+    const cardX = e.clientX - cardRect.left;
+    const cardY = e.clientY - cardRect.top;
+    const centerX = cardRect.width / 2;
+    const centerY = cardRect.height / 2;
+
+  const rotateX = ((cardY - centerY) / centerY) * 10;
+  const rotateY = ((cardX - centerX) / centerX) * -10;
+
+    card.style.transform = `rotateX(${rotateX}deg) rotateY(${rotateY}deg)`;
+});
+
+card.addEventListener("mouseleave", () => {
+    card.style.transform = "rotateX(0deg) rotateY(0deg)";
+});
+
+    </script>
+</body>
+</html>
