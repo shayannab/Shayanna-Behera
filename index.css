@@ -102,7 +102,7 @@ a:hover {
     margin-top: 1.5vw;
     font-family: "Inter", sans-serif;
     position: relative;
-    font-size: 1vw;
+    font-size: 1.2vw;
     color: #9a9a9a;
     line-height: 1.125;
     font-weight: 400;
@@ -342,69 +342,7 @@ a:hover {
 }
 
 
-.skills-wrapper {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 1rem;
-    margin-top: 2rem;
-    justify-content: space-between;
-}
 
-.skill-box {
-    width: 20rem;
-    margin-left: 2rem;
-    margin-right: 2rem;  
-  background: rgba(15, 15, 15,0.04); /* light transparency */
-  border: 1px solid rgba(245,245,245,0.012); /* soft white border */
-  backdrop-filter: blur(12px); /* the glass blur effect */
-  -webkit-backdrop-filter: blur(12px); /* safari support */
-  border-radius: 1rem;
-  padding: 2rem;
-  box-shadow: 0 8px 20px rgba(245, 245, 245, 0.2);
-  transition: transform 0.3s ease;
-
-}
-
-.skill-box:hover {
-    transform: translateY(-5px);
-}
-
-.skill-box h3 {
-    font-size: 2vw;
-    font-family: "Playfair Display", serif;
-    margin-bottom: 1rem;
-    color: #ffffff;
-}
-
-.skill-box ul {
-  list-style: none;
-  padding: 0;
-  margin: 0;
-}
-
-.skill-box ul li {
-  font-size: 1vw;
-  font-family: 'Inter', sans-serif;
-  margin-bottom: 0.75rem;
-  display: flex;
-  color: #888888;
-  align-items: center;
-}
-
-.skill-box ul li::before {
-  content: "•";
-  color: #FF6B2D;
-  font-size: 1.2rem;
-  margin-right: 0.5rem;
-}
-
-.skill-box ul li:hover{
-    text-decoration: underline;
-    text-decoration-thickness: 0.1rem;
-    text-decoration-style: solid;
-    text-underline-offset: 0.5rem;
-    text-decoration-color:#bcbcc4;
-}
 
 .banner {
   width: 100%;
@@ -577,6 +515,74 @@ footer p{
     font-family: "Inter", sans-serif;
     color: #ffffff;
 }
+/* 🌍 Global - All screen sizes */
+.skill-reveal-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 1.5rem;
+  margin-top: 2rem;
+}
+
+.skill-card {
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 16px;
+  padding: 1.2rem 1.5rem;
+  color: #fff;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 0 4px 20px rgba(255, 255, 255, 0.03);
+    cursor: pointer;
+  height: 60px; /* collapsed */
+  position: relative;
+  transition: max-height 0.4s ease, background 0.3s, box-shadow 0.3s;
+
+  overflow: hidden
+}
+
+.skill-title {
+  font-size: 1.8vw;
+  font-weight: 600;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-family: "Inter", sans-serif;
+}
+
+.skill-arrow {
+  color: #FF6B2D;
+  font-size: 1.1rem;
+transition: transform 0.4s ease;
+}
+
+.skill-details {
+  opacity: 0;
+  max-height: 0;
+  overflow: hidden;
+  transform: translateY(10px);
+  transition: all 0.3s ease;
+  margin-top: 0.5rem;
+  color: rgba(255, 255, 255, 0.85);
+  font-size: 1.2vw;
+  font-family: "Playfair Display", serif;
+}
+
+/* 💥 Hover logic works everywhere now */
+.skill-card:hover {
+  height: auto;
+   background: rgba(255, 255, 255, 0.08);
+  box-shadow: 0 12px 32px rgba(255, 255, 255, 0.08);
+}
+
+.skill-card:hover .skill-details {
+  opacity: 1;
+  max-height: 300px;
+  transform: translateY(0);
+}
+
+.skill-card:hover .skill-arrow {
+  opacity: 0;
+  transform: rotate(90deg);
+}
+
 @media screen and (max-width: 768px) {
   .header {
     flex-direction: column;
@@ -609,29 +615,5 @@ footer p{
   .h1 {
     font-size: 16vw !important;
   }
-  .skills-wrapper {
-    flex-direction: column;
-    align-items: center;
-    padding: 0 1rem;
-  }
 
-  .skill-box {
-    width: 90%;
-    margin: 1rem 0;
-  }
-
-  .skill-box h3 {
-    font-size: 3vw;
-  }
-
-  .skill-box ul li {
-    font-size: 2.5vw;
-  }
-  .tagline{
-    font-size: 3vw;
-  }
-  .categories{
-    font-size: 5vw;
-
-  }
-}
+ 
