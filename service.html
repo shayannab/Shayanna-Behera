@@ -1,209 +1,279 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Services</title>
-  <link rel="stylesheet" href="service.css"/>
-  <style>
-    @import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap');
-    </style>
-    <style>
-    @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap');
-    </style>
-  <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
-
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Services - Shayanna Behera</title>
+    <link rel="stylesheet" href="./service.css">
 </head>
 <body>
-
-  <!-- HERO -->
-  <section class="hero-section">
-    <h1 class="hero-heading">
-      Let Your Website Be Your Best <em>Salesperson.</em>
-    </h1>
-    <p class="hero-subtext">
-      Custom designs that are fast, mobile-friendly, and built to convert, because your digital storefront should work <span style="color: #FF6B2D;">24/7</span>
-    </p>
-    </p>
-    <div class="hero-cta">
-      <button class="btn btn-primary"> <a href="https://calendly.com/shayannabehera/30min">book a free discovery call</a></button>
-      <button class="btn btn-secondary"><a href="index.html" onclick="localStorage.setItem('skipIntro', 'true')">see my work</a></button>
-    </div>
-  </section>
-  <h2 class="section-heading">what I offer<span style="color: #FF6B2D;">?</span></h2>
- <div class="cards-scroll-wrapper">
-  <div class="cards-row">
-    
-    <!-- CARD 1 -->
-    <div class="flip-card">
-      <div class="flip-card-inner">
-        <div class="flip-card-front">
-          <img src="./img/rocket.svg" alt="Launch icon" class="icon">
-          <h3>launch-ready websites</h3>
-          <p>Sites that don’t just look good,they work.</p>
+    <!-- Navigation -->
+    <nav class="nav">
+        <div class="nav-links">
+            <a href="./index.html">home</a>
+            <a href="#services" class="active">services</a>
+            <a href="#skills">skills</a>
+            <a href="#projects">projects</a>
+            <a href="#contact">contact</a>
         </div>
-        <div class="flip-card-back">
-          <h4>What's Included:</h4>
-          <ul>
-            <li><img src="./img/check.svg" class="list-icon">Design & Code from scratch</li>
-            <li><img src="./img/check.svg" class="list-icon">Conversion-ready layout</li>
-            <li><img src="./img/check.svg" class="list-icon">Mobile-friendly</li>
-          </ul>
-          <a class="btn-card" href="https://calendly.com/shayannabehera/30min">book now</a>
-        </div>
-      </div>
+    </nav>
+
+    <!-- Main Content -->
+    <div class="container">
+        <!-- Hero Section -->
+        <section class="hero">
+            <h1 class="hero-title">services</h1>
+            <p class="hero-subtitle">
+                As a <span class="hero-highlight">CS undergrad passionate about web development and AI</span>, 
+                I offer services aligned with the roles I'm targeting - whether you need a 
+                <span class="hero-highlight">frontend developer</span>, <span class="hero-highlight">full-stack engineer</span>, 
+                or <span class="hero-highlight">ML developer</span> for your next project.
+            </p>
+        </section>
+
+        <!-- Frontend Developer Role -->
+        <section class="role-section">
+            <div class="role-header">
+                <div class="role-tag">Frontend Developer</div>
+                <h2 class="role-title">crafting beautiful interfaces</h2>
+                <p class="role-description">
+                    Perfect for companies looking for a frontend developer who can build modern, 
+                    responsive web applications with clean code and intuitive user experiences.
+                </p>
+            </div>
+
+            <div class="services-grid">
+                <div class="service-card">
+                    <div class="service-icon">⚛️</div>
+                    <h3 class="service-title">React/Next.js Development</h3>
+                    <p class="service-description">
+                        Modern web applications built with React, Next.js, and TypeScript. 
+                        Component-based architecture with performance optimization.
+                    </p>
+                    <ul class="service-features">
+                        <li>Responsive design & mobile-first approach</li>
+                        <li>State management (Redux, Zustand)</li>
+                        <li>API integration & data fetching</li>
+                        <li>Performance optimization & SEO</li>
+                    </ul>
+                    <div class="service-price">Starting at $800</div>
+                    <a href="#contact" class="service-cta">Get Started</a>
+                </div>
+
+                <div class="service-card">
+                    <div class="service-icon">🎨</div>
+                    <h3 class="service-title">UI/UX Implementation</h3>
+                    <p class="service-description">
+                        Converting designs into pixel-perfect, interactive web interfaces 
+                        using modern CSS frameworks and animation libraries.
+                    </p>
+                    <ul class="service-features">
+                        <li>Figma/Adobe XD to code conversion</li>
+                        <li>CSS animations & micro-interactions</li>
+                        <li>Tailwind CSS & styled-components</li>
+                        <li>Cross-browser compatibility</li>
+                    </ul>
+                    <div class="service-price">Starting at $500</div>
+                    <a href="#contact" class="service-cta">Get Started</a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Full-Stack Developer Role -->
+        <section class="role-section">
+            <div class="role-header">
+                <div class="role-tag">Full-Stack Developer</div>
+                <h2 class="role-title">end-to-end solutions</h2>
+                <p class="role-description">
+                    Ideal for startups and companies needing a versatile developer who can handle 
+                    both frontend and backend development, from database design to deployment.
+                </p>
+            </div>
+
+            <div class="services-grid">
+                <div class="service-card">
+                    <div class="service-icon">🚀</div>
+                    <h3 class="service-title">Full-Stack Web Applications</h3>
+                    <p class="service-description">
+                        Complete web applications from concept to deployment. Frontend, backend, 
+                        database design, and cloud infrastructure setup.
+                    </p>
+                    <ul class="service-features">
+                        <li>MERN/NEXT.js stack development</li>
+                        <li>Database design (PostgreSQL, MongoDB)</li>
+                        <li>RESTful APIs & GraphQL</li>
+                        <li>Authentication & authorization</li>
+                        <li>AWS/Vercel deployment</li>
+                    </ul>
+                    <div class="service-price">Starting at $1500</div>
+                    <a href="#contact" class="service-cta">Get Started</a>
+                </div>
+
+                <div class="service-card">
+                    <div class="service-icon">💳</div>
+                    <h3 class="service-title">E-commerce & SaaS Development</h3>
+                    <p class="service-description">
+                        Building scalable e-commerce platforms and SaaS applications with 
+                        payment integration, user management, and analytics.
+                    </p>
+                    <ul class="service-features">
+                        <li>Stripe/PayPal payment integration</li>
+                        <li>User dashboard & admin panels</li>
+                        <li>Subscription management</li>
+                        <li>Analytics & reporting</li>
+                        <li>Email automation</li>
+                    </ul>
+                    <div class="service-price">Starting at $2500</div>
+                    <a href="#contact" class="service-cta">Get Started</a>
+                </div>
+            </div>
+        </section>
+
+        <!-- AI/ML Developer Role -->
+        <section class="role-section">
+            <div class="role-header">
+                <div class="role-tag">AI/ML Developer</div>
+                <h2 class="role-title">intelligent solutions</h2>
+                <p class="role-description">
+                    Perfect for companies exploring AI integration or needing machine learning 
+                    solutions. Combining web development skills with AI/ML expertise.
+                </p>
+            </div>
+
+            <div class="services-grid">
+                <div class="service-card">
+                    <div class="service-icon">🤖</div>
+                    <h3 class="service-title">AI-Powered Web Applications</h3>
+                    <p class="service-description">
+                        Integrating AI capabilities into web applications - chatbots, 
+                        recommendation systems, and intelligent data processing.
+                    </p>
+                    <ul class="service-features">
+                        <li>OpenAI API integration</li>
+                        <li>Custom chatbot development</li>
+                        <li>Natural language processing</li>
+                        <li>Real-time AI recommendations</li>
+                    </ul>
+                    <div class="service-price">Starting at $1200</div>
+                    <a href="#contact" class="service-cta">Get Started</a>
+                </div>
+
+                <div class="service-card">
+                    <div class="service-icon">📊</div>
+                    <h3 class="service-title">Data Analysis & Visualization</h3>
+                    <p class="service-description">
+                        Custom ML models, data analysis pipelines, and interactive 
+                        dashboards for business intelligence and decision making.
+                    </p>
+                    <ul class="service-features">
+                        <li>Custom ML model development</li>
+                        <li>Data preprocessing & analysis</li>
+                        <li>Interactive dashboards (D3.js, Plotly)</li>
+                        <li>Predictive analytics</li>
+                    </ul>
+                    <div class="service-price">Starting at $1000</div>
+                    <a href="#contact" class="service-cta">Get Started</a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Value Proposition -->
+        <section class="value-section">
+            <h2 class="value-title">why work with me?</h2>
+            <p class="value-description">
+                As a CS student actively learning and building, I bring fresh perspectives, 
+                modern tech knowledge, and the hunger to prove myself through quality work.
+            </p>
+
+            <div class="value-points">
+                <div class="value-point">
+                    <div class="value-point-icon">⚡</div>
+                    <h4>Modern Tech Stack</h4>
+                    <p>Up-to-date with latest technologies and best practices in web development and AI.</p>
+                </div>
+                <div class="value-point">
+                    <div class="value-point-icon">💰</div>
+                    <h4>Competitive Pricing</h4>
+                    <p>Quality work at student-friendly rates while building my professional portfolio.</p>
+                </div>
+                <div class="value-point">
+                    <div class="value-point-icon">🎯</div>
+                    <h4>Career-Focused Approach</h4>
+                    <p>Each project is an opportunity to showcase skills relevant to my target roles.</p>
+                </div>
+                <div class="value-point">
+                    <div class="value-point-icon">🔄</div>
+                    <h4>Iterative Development</h4>
+                    <p>Agile approach with regular updates and feedback incorporation.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- CTA Section -->
+        <section class="cta-section">
+            <h2 class="cta-title">let's work together!</h2>
+            <p class="cta-description">
+                Ready to start your next project? Whether you need a frontend developer, 
+                full-stack engineer, or AI integration specialist, I'm here to help bring your ideas to life.
+            </p>
+            <div class="cta-buttons">
+                <a href="#contact" class="btn primary">Start a Project</a>
+                <a href="#projects" class="btn secondary">View My Work</a>
+            </div>
+        </section>
     </div>
 
-    <!-- CARD 2 -->
-    <div class="flip-card">
-      <div class="flip-card-inner">
-        <div class="flip-card-front">
-          <img src="./img/workflow.svg" alt="Launch icon" class="icon">
-          <h3>AI Automations</h3>
-          <p>Ditch the busywork, Let bots handle it.</p>
-        </div>
-        <div class="flip-card-back">
-          <h4>What's Included:</h4>
-          <ul>
-            <li><img src="./img/check.svg" class="list-icon">Chatbot & auto-DM setup</li>
-            <li><img src="./img/check.svg" class="list-icon">Notion/Sheets integration</li>
-            <li><img src="./img/check.svg" class="list-icon">Zapier / Make setup</li>
-          </ul>
-          <a class="btn-card">Automate Me</a>
-        </div>
-      </div>
-    </div>
+    <!-- Footer -->
+    <footer class="footer">
+        <p>© 2024 Copyright: Shayanna Behera</p>
+    </footer>
 
-    <!-- CARD 3 -->
-    <div class="flip-card">
-      <div class="flip-card-inner">
-        <div class="flip-card-front">
-          <img src="./img/mouse-pointer-click.svg" alt="Launch icon" class="icon">
-          <h3>Landing Pages</h3>
-          <p>One page. One goal. Max impact.</p>
-        </div>
-        <div class="flip-card-back">
-          <h4>What's Included:</h4>
-          <ul>
-            <li><img src="./img/check.svg" class="list-icon">Responsive one-pagers</li>
-            <li><img src="./img/check.svg" class="list-icon">Built for leads & launches</li>
-            <li><img src="./img/check.svg" class="list-icon">Mobile-friendly</li>
-          </ul>
-          <a class="btn-card" href="https://calendly.com/shayannabehera/30min">Get One</a>
-        </div>
-      </div>
-    </div>
+    <script>
+        // Scroll animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -100px 0px'
+        };
 
-    <!-- CARD 4 -->
-    <div class="flip-card">
-      <div class="flip-card-inner">
-        <div class="flip-card-front">
-          <img src="./img/layers-2.svg" alt="Launch icon" class="icon">
-          <h3> Re-Designing</h3>
-          <p>Glow-up your site to 2025 standards.</p>
-        </div>
-        <div class="flip-card-back">
-          <h4>What's Included:</h4>
-          <ul>
-            <li><img src="./img/check.svg" class="list-icon">UX audit</li>
-            <li><img src="./img/check.svg" class="list-icon">Design refresh</li>
-            <li><img src="./img/check.svg" class="list-icon">Interaction polish</li>
-          </ul>
-          <a class="btn-card">Makeover Time</a>
-        </div>
-      </div>
-    </div>
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('animate');
+                }
+            });
+        }, observerOptions);
 
-    <!-- CARD 5 & 6: You can duplicate as needed -->
+        // Observe all role sections
+        document.addEventListener('DOMContentLoaded', () => {
+            const roleSections = document.querySelectorAll('.role-section');
+            roleSections.forEach(section => observer.observe(section));
+        });
 
-  </div>
-</div>
+        // Navbar scroll effect
+        const navbar = document.querySelector('.nav');
+        
+        window.addEventListener('scroll', () => {
+            const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+            
+            if (scrollTop > 100) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
+            }
+        });
 
-
-<section class="why-work-section">
-  <div class="why-work-container">
-    <h2>✨ Why Work With Me?</h2>
-    <p>
-      <p class="why-text">
-  I approach every project with clarity, creativity, and precision. Whether you're launching something new or leveling up an existing brand, I focus on building digital experiences that are visually compelling and strategically effective. No bloated templates, no unnecessary fluff...just thoughtful, well-executed design that aligns with your goals.
-    </p>
-  </div>
-</section>
-
-<!-- MY PROCESS -->
-<section class="process-section">
-  <h2 class="section-heading">My Process<span style="color: #FF6B2D; margin-bottom: 3px;">.</span></h2>
-  <div class="process-timeline">
-
-    <div class="timeline-line"></div>
-
-    <div class="timeline-step" data-aos="fade-up">
-      <div class="step-circle">1</div>
-      <div class="step-content">
-        <h4>We Talk</h4>
-        <p> Get on a one-on-one discovery call to understand what you need.</p>
-      </div>
-    </div>
-
-    <div class="timeline-step" data-aos="fade-up" data-aos-delay="100">
-      <div class="step-circle">2</div>
-      <div class="step-content">
-        <h4>We Plan</h4>
-        <p>Low-fidelity mockups, moodboards, and structure, refined with your feedback.</p>
-      </div>
-    </div>
-
-    <div class="timeline-step" data-aos="fade-up" data-aos-delay="200">
-      <div class="step-circle">3</div>
-      <div class="step-content">
-        <h4>We Build</h4>
-        <p> I develop a responsive, optimized site tailored to your brand and audience.</p>
-      </div>
-    </div>
-
-    <div class="timeline-step" data-aos="fade-up" data-aos-delay="300">
-      <div class="step-circle">4</div>
-      <div class="step-content">
-        <h4>We Launch</h4>
-        <p>Final tests, tweaks, and done! You’re live and looking sharp online.</p>
-      </div>
-    </div>
-
-  </div>
-</section>
-
-<!-- FINAL CTA SECTION -->
-<section class="final-cta-section">
-  <h2 class="cta-heading">Let's Collaborate!</h2>
-  <p class="cta-subtext">
-If you're looking for a site that's not just well-designed but actually supports your goals, you're in the right place. Let's turn your vision into something you're proud to share.
-</p>
-
-</p>
-  <button class="btn btn-primary"><a href="https://calendly.com/shayannabehera/30min">Book a Free Discovery Call</a></button>
-  <a href="./index.html" onclick="fadeOutAndRedirect()" class="btn-back-home">← Back to Main Site</a>
-</section>
-
-
-
-
-
-<!-- AOS Script -->
-<script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
-<script>
-  AOS.init();
-
-
-  function fadeOutAndRedirect() {
-    document.body.classList.add('fade-out');
-    setTimeout(() => {
-      window.location.href = "/index.html"; // or full link
-    }, 500);
-  }
-
-
-</script>
-
-
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+    </script>
 </body>
-</html>
