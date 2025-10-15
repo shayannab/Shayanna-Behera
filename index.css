@@ -616,4 +616,341 @@ transition: transform 0.4s ease;
     font-size: 16vw !important;
   }
 
- 
+}
+
+ .personal-section {
+            width: 100%;
+            max-width: 1200px;
+            padding: 4rem 2rem;
+        }
+        
+        .section-header {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+        
+        .section-header p {
+            font-family: 'Inter', sans-serif;
+            font-size: 1.2rem;
+            color: #ffffff;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+        
+        .section-header h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 4rem;
+            color: #888888;
+        }
+        
+        .cards-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 4rem;
+            flex-wrap: wrap;
+            max-width: 1100px;
+            margin: 0 auto;
+            position: relative;
+        }
+        
+        .cards-container::before {
+            content: '';
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%);
+            width: 2px;
+            height: 60%;
+            background: linear-gradient(to bottom, transparent, #FF6B2D 20%, #FF6B2D 80%, transparent);
+            opacity: 0.3;
+        }
+        
+        /* Quote Card - Ticket Style */
+        .quote-card-wrapper {
+            perspective: 1000px;
+            position: relative;
+            height: 240px;
+            width: 450px;
+            flex-shrink: 0;
+        }
+        
+        .quote-card-inner {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            transition: transform 0.6s;
+            transform-style: preserve-3d;
+        }
+        
+        .quote-card-wrapper.flipped .quote-card-inner {
+            transform: rotateY(180deg);
+        }
+        
+        .quote-card-front,
+        .quote-card-back {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            backface-visibility: hidden;
+            cursor: pointer;
+        }
+        
+        .quote-card-back {
+            transform: rotateY(180deg);
+        }
+        
+        /* Ticket shape */
+        .ticket-card {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            background: #2f2f2f;
+            border: 3px solid #FF6B2D;
+            clip-path: polygon(
+                0 0,
+                100% 0,
+                100% 8%,
+                98% 10%,
+                100% 12%,
+                100% 20%,
+                98% 22%,
+                100% 24%,
+                100% 32%,
+                98% 34%,
+                100% 36%,
+                100% 44%,
+                98% 46%,
+                100% 48%,
+                100% 56%,
+                98% 58%,
+                100% 60%,
+                100% 68%,
+                98% 70%,
+                100% 72%,
+                100% 80%,
+                98% 82%,
+                100% 84%,
+                100% 92%,
+                98% 94%,
+                100% 96%,
+                100% 100%,
+                0 100%
+            );
+            padding: 2rem 1.5rem;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            box-shadow: 4px 4px 0px rgba(255, 107, 45, 0.2);
+        }
+        
+        .ticket-number {
+            position: absolute;
+            top: 1rem;
+            right: 1.2rem;
+            font-family: 'Inter', sans-serif;
+            font-size: 0.7rem;
+            color: #FF6B2D;
+            font-weight: 600;
+        }
+        
+        .ticket-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 6px 6px 0px rgba(255, 107, 45, 0.3);
+        }
+        
+        /* Blob card for dad jokes */
+        .blob-stack {
+            position: relative;
+            width: 100%;
+            height: 100%;
+        }
+        
+        .blob-layer {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background: #1a1a1a;
+            transition: transform 0.3s ease;
+        }
+        
+        .blob-layer-1 {
+            border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%;
+            transform: rotate(0deg);
+            z-index: 1;
+        }
+        
+        .blob-layer-2 {
+            border-radius: 30% 60% 70% 40% / 50% 60% 30% 60%;
+            transform: rotate(0deg) translate(8px, 8px);
+            background: #2a2a2a;
+            z-index: 2;
+        }
+        
+        .blob-layer-3 {
+            border-radius: 40% 60% 60% 40% / 60% 40% 60% 40%;
+            transform: rotate(0deg) translate(16px, 16px);
+            background: #2f2f2f;
+            border: 3px solid #FF6B2D;
+            z-index: 3;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 1.5rem;
+        }
+        
+        .blob-stack:hover .blob-layer-1 {
+            transform: rotate(-3deg) translate(-4px, -4px);
+        }
+        
+        .blob-stack:hover .blob-layer-2 {
+            transform: rotate(2deg) translate(12px, 4px);
+        }
+        
+        .blob-stack:hover .blob-layer-3 {
+            transform: rotate(-2deg) translate(20px, 20px);
+        }
+        
+        .card-content {
+            position: relative;
+            z-index: 10;
+            color: #fff;
+            text-align: center;
+        }
+        
+        .card-title {
+            font-family: 'Inter', sans-serif;
+            font-size: 0.85rem;
+            font-weight: 700;
+            color: #FF6B2D;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 0.6rem;
+        }
+        
+        .quote-text {
+            font-family: 'Playfair Display', serif;
+            font-size: 0.85rem;
+            color: #ffffff;
+            line-height: 1.4;
+            margin-bottom: 0.5rem;
+        }
+        
+        .quote-placeholder {
+            font-family: 'Playfair Display', serif;
+            font-size: 0.8rem;
+            color: #ffffff;
+            line-height: 1.4;
+        }
+        
+        .flip-hint {
+            font-family: 'Inter', sans-serif;
+            font-size: 0.65rem;
+            color: #888888;
+            margin-top: 0.5rem;
+        }
+        
+        /* Bottle Card Stack */
+        .bottle-card-wrapper {
+            position: relative;
+            height: 280px;
+            width: 260px;
+            flex-shrink: 0;
+            display: flex;
+            align-items: center;
+        }
+        
+        .bottle-blob-1 {
+            border-radius: 50% 40% 60% 40% / 40% 50% 60% 50%;
+            transform: rotate(4deg);
+        }
+        
+        .bottle-blob-2 {
+            border-radius: 60% 50% 40% 60% / 50% 40% 50% 60%;
+            transform: rotate(-3deg) translate(8px, 8px);
+        }
+        
+        .bottle-blob-3 {
+            border-radius: 45% 55% 50% 50% / 55% 45% 55% 45%;
+            transform: rotate(2deg) translate(16px, 16px);
+        }
+        
+        .bottle-card-wrapper:hover .bottle-blob-1 {
+            transform: rotate(7deg) translate(-4px, -4px);
+        }
+        
+        .bottle-card-wrapper:hover .bottle-blob-2 {
+            transform: rotate(-5deg) translate(12px, 4px);
+        }
+        
+        .bottle-card-wrapper:hover .bottle-blob-3 {
+            transform: rotate(4deg) translate(20px, 20px);
+        }
+        
+        .bottle {
+            width: 70px;
+            height: 90px;
+            margin: 0.8rem auto;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+        }
+        
+        .bottle:hover {
+            transform: scale(1.15) rotate(-8deg);
+        }
+        
+        .bottle svg {
+            width: 100%;
+            height: 100%;
+            fill: none;
+            stroke: #FF6B2D;
+            stroke-width: 3;
+        }
+        
+        .joke-text {
+            font-family: 'Inter', sans-serif;
+            font-size: 0.85rem;
+            color: #ffffff;
+            line-height: 1.4;
+            margin-top: 0.8rem;
+            transition: opacity 0.2s ease;
+        }
+        
+        .click-hint {
+            font-family: 'Inter', sans-serif;
+            font-size: 0.75rem;
+            color: #888888;
+            margin-top: 0.5rem;
+        }
+        
+        @media screen and (max-width: 768px) {
+            .section-header h2 {
+                font-size: 2.5rem;
+            }
+            
+            .cards-container {
+                flex-direction: column;
+                align-items: center;
+                gap: 3rem;
+            }
+            
+            .cards-container::before {
+                display: none;
+            }
+            
+            .quote-card-wrapper,
+            .bottle-card-wrapper {
+                height: 280px;
+            }
+            
+            .quote-card-wrapper {
+                width: 400px;
+                height: 220px;
+            }
+            
+            .bottle-card-wrapper {
+                width: 220px;
+            }
+        }
