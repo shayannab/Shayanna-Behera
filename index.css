@@ -808,6 +808,27 @@ footer p{
     transition: all 0.3s ease;
 }
 
+.quote-text.special {
+  color: #FF6B2D;
+  text-shadow: 0 0 20px #FF6B2D, 0 0 40px #fff;
+  animation: bounceGlow 1.2s cubic-bezier(.36,.07,.19,.97) both, specialColor 2s linear infinite;
+}
+
+@keyframes bounceGlow {
+  0% { transform: scale(1) translateY(0); }
+  20% { transform: scale(1.1) translateY(-10px); }
+  40% { transform: scale(0.95) translateY(0); }
+  60% { transform: scale(1.05) translateY(-5px); }
+  80% { transform: scale(1) translateY(0); }
+  100% { transform: scale(1) translateY(0); }
+}
+
+@keyframes specialColor {
+  0% { color: #FF6B2D; }
+  50% { color: #fff; }
+  100% { color: #FF6B2D; }
+}
+
 .quote-action {
     font-size: 0.9rem;
     color: #888;
