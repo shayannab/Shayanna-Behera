@@ -30,11 +30,14 @@
         </div>
     </div>
 
-
-
-
     <!--main content-->
     <section id="home" > 
+        <!-- Open to Work Badge -->
+        <div class="work-badge">
+            <div class="status-dot"></div>
+            <div class="work-text">Open to Work</div>
+        </div>
+
         <!-- Navigation bar -->
             <nav id="desktop_nav">
                 <div>
@@ -81,11 +84,8 @@
                     <div class="h1">a</div>
                     <div class="h1"><span>.</span></div>
                 </div>
-                <p class="p1"> web developer |  ML dev</p>
-                <p class="p2">I'm a CS undergrad passionate about crafting intuitive web interfaces and exploring the potential of AI. 
-                     I’ve worked across modern web stacks and ML frameworks, and I’m always learning, building, and shipping.
-                    Currently open to freelance projects, internships, or just cool tech collabs.
-                   
+                <p class="p1">Full-Stack | AI/ML</p>
+                <p class="p2">I build products and understand how to grow them. Open to dev, product, and marketing roles.
                 </p>
                 <div>
                     <ul class="links">
@@ -176,76 +176,19 @@
 
     <section class="personal-section">
         <div class="section-header">
-            <p>a little more about me</p>
-            <h2>fun stuff<span style="color: #FF6B2D;">.</span></h2>
+            <p>a little piece of</p>
+            <h2>wisdom<span style="color: #FF6B2D;">.</span></h2>
         </div>
         
-        <div class="cards-container">
-            <!-- Quote Card - Ticket Style -->
-            <div class="quote-card-wrapper" onclick="flipQuote()">
-                <div class="quote-card-inner">
-                    <!-- Front -->
-                    <div class="quote-card-front">
-                        <div class="ticket-card">
-                            <div class="ticket-image-section">
-                                <div class="ticket-image-placeholder">
-                                    Your Logo/<br>Emblem Here
-                                </div>
-                            </div>
-                            <div class="ticket-content-section">
-                                <div class="ticket-content">
-                                    <div class="card-title">Words of Wisdom</div>
-                                    <div class="quote-placeholder">
-                                        Having a rough day? Tap to flip for motivation
-                                    </div>
-                                    <div class="flip-hint">click to flip</div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <!-- Back -->
-                    <div class="quote-card-back">
-                        <div class="ticket-card">
-                            <div class="ticket-image-section">
-                                <div class="ticket-image-placeholder">
-                                    Your Logo/<br>Emblem Here
-                                </div>
-                            </div>
-                            <div class="ticket-content-section">
-                                <div class="ticket-content">
-                                    <div class="quote-text" id="quoteText">
-                                        Your Entire Life Will Change When You Realize That Anything Above Zero Compounds.
-                                    </div>
-                                    <div class="flip-hint">tap for another</div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+        <div class="quote-container">
+            <div class="quote-card" onclick="changeQuote()">
+                <div class="card-label">W quotes</div>
+                <div class="quote-text" id="quoteText">
+                    Your Entire Life Will Change When You Realize That Anything Above Zero Compounds.
                 </div>
-            </div>
-            
-            <!-- Bottle Card -->
-            <div class="bottle-card-wrapper">
-                <div class="blob-stack">
-                    <div class="blob-layer bottle-blob-1"></div>
-                    <div class="blob-layer bottle-blob-2"></div>
-                    <div class="blob-layer blob-layer-3 bottle-blob-3">
-                        <div class="card-content">
-                            <div class="card-title">Dad Jokes</div>
-                            <div class="bottle" onclick="openBottle()">
-                                <svg viewBox="0 0 100 150" xmlns="http://www.w3.org/2000/svg">
-                                    <rect x="35" y="10" width="30" height="15" rx="3"/>
-                                    <path d="M 40 25 L 35 40 L 35 110 Q 35 130 50 130 Q 65 130 65 110 L 65 40 L 60 25 Z"/>
-                                    <rect x="42" y="5" width="16" height="8" rx="2"/>
-                                </svg>
-                            </div>
-                            <div class="joke-text" id="jokeText">
-                                Click the bottle!
-                            </div>
-                            <div class="click-hint">tap the bottle</div>
-                        </div>
-                    </div>
+                <div class="quote-action">
+                    tap for another
+                    <span class="arrow">→</span>
                 </div>
             </div>
         </div>
@@ -264,8 +207,8 @@
     <section id="contact" class="contact-section">
         <div class="glass-wrapper">
             <div class="glass-card" id="glassCard">
-                <h2>let’s work together<span>!</span></h2>
-                <p>I’m available for freelance, internships, and creative collabs. Reach out via your favorite platform below.</p>
+                <h2>let's work together<span>!</span></h2>
+                <p>I'm available for freelance, internships, and creative collabs. Reach out via your favorite platform below.</p>
                 <div class="icon-links">
                     <a href="https://github.com/shayannab" target="_blank" title="GitHub"><img src="./img/gh.png" alt="GitHub icon" /></a>
                     <a href="https://www.linkedin.com/in/shayanna-behera-804902308/" target="_blank" title="LinkedIn"><img src="./img/li.png" alt="LinkedIn icon" /></a>
@@ -355,14 +298,29 @@
     });
 
     gsap.to(".loader", {
-    delay: 5.5, // wait till all animations are done
+    delay: 5.5,
     opacity: 0,
     display: "none",
     onComplete: () => {
-        // Unlock scroll after loader is gone
         document.body.style.overflow = "auto";
     }
 });
+
+// Animate the Open to Work badge
+gsap.to(".work-badge", {
+    delay: 6.5,
+    opacity: 1,
+    duration: 0.8,
+    ease: "power2.out"
+});
+
+// Remove cursor from work-text after typing completes
+setTimeout(() => {
+    const workText = document.querySelector('.work-text');
+    if (workText) {
+        workText.classList.add('typed');
+    }
+}, 9500);
 
 function toggleMenu(){
     const menu= document.querySelector('.menu-links');
@@ -390,67 +348,41 @@ card.addEventListener("mouseleave", () => {
     card.style.transform = "rotateX(0deg) rotateY(0deg)";
 });
 
+// Quote functionality
 const quotes = [
-            "Your Entire Life Will Change When You Realize That Anything Above Zero Compounds.",
-            "The magic you are looking for is in the work you are avoiding.",
-            "never had no time i'm constantly evolving",
-            "Outgrow your own bullshit.",
-            "chase the vision, not the validation.",
-            "I CAN'T CRY ABOUT HAVING A LOT ON MY PLATE WHEN MY GOAL WAS TO EAT",
-            "Move like everything is gonna work out. Because it is",
-            "Let dat shi go",
-            "i can't control it so i shouldn't worry",
-            "be careful how you speak to yourself, you are always listening",
-            "you will soon realize that it was all in your favor",
-            "Fuck this and that, que sera sera",
-            "There is a seat waiting for you at tables you haven't even seen.",
-            "Ask for more. The universe isn't on a budget.",
-            "the city's calling u baddie",
-            "Nobody Is Thinking About You."
-        ];
-        
-        const dadJokes = [
-            "Why don't scientists trust atoms? Because they make up everything!",
-            "I used to hate facial hair, but then it grew on me.",
-            "What do you call a fake noodle? An impasta!",
-            "Why did the scarecrow win an award? He was outstanding in his field!",
-            "I'm reading a book about anti-gravity. It's impossible to put down!",
-            "What do you call a bear with no teeth? A gummy bear!",
-            "Why don't eggs tell jokes? They'd crack each other up!",
-            "I only know 25 letters of the alphabet. I don't know y.",
-            "What's the best time to go to the dentist? Tooth-hurty!",
-            "Why did the coffee file a police report? It got mugged!",
-            "How do you organize a space party? You planet!",
-            "What did the ocean say to the beach? Nothing, it just waved!",
-            "Why don't skeletons fight each other? They don't have the guts!",
-            "What do you call cheese that isn't yours? Nacho cheese!",
-            "Why couldn't the bicycle stand up? It was two tired!"
-        ];
-        
-        let currentQuoteIndex = 0;
-        
-        function flipQuote() {
-            const card = document.querySelector('.quote-card-wrapper');
-            const quoteText = document.getElementById('quoteText');
-            
-            if (card.classList.contains('flipped')) {
-                currentQuoteIndex = (currentQuoteIndex + 1) % quotes.length;
-                quoteText.textContent = quotes[currentQuoteIndex];
-            }
-            
-            card.classList.toggle('flipped');
-        }
-        
-        function openBottle() {
-            const jokeText = document.getElementById('jokeText');
-            const randomJoke = dadJokes[Math.floor(Math.random() * dadJokes.length)];
-            
-            jokeText.style.opacity = '0';
-            setTimeout(() => {
-                jokeText.textContent = randomJoke;
-                jokeText.style.opacity = '1';
-            }, 200);
-        }
+    "Your Entire Life Will Change When You Realize That Anything Above Zero Compounds.",
+    "The magic you are looking for is in the work you are avoiding.",
+    "never had no time i'm constantly evolving",
+    "Outgrow your own bullshit.",
+    "chase the vision, not the validation.",
+    "I CAN'T CRY ABOUT HAVING A LOT ON MY PLATE WHEN MY GOAL WAS TO EAT",
+    "Move like everything is gonna work out. Because it is",
+    "Let dat shi go",
+    "i can't control it so i shouldn't worry",
+    "be careful how you speak to yourself, you are always listening",
+    "you will soon realize that it was all in your favor",
+    "Fuck this and that, que sera sera",
+    "There is a seat waiting for you at tables you haven't even seen.",
+    "Ask for more. The universe isn't on a budget.",
+    "the city's calling u baddie",
+    "Nobody Is Thinking About You."
+];
+
+let currentQuoteIndex = 0;
+
+function changeQuote() {
+    const quoteText = document.getElementById('quoteText');
+    currentQuoteIndex = (currentQuoteIndex + 1) % quotes.length;
+    
+    quoteText.style.opacity = '0';
+    quoteText.style.transform = 'translateY(10px)';
+    
+    setTimeout(() => {
+        quoteText.textContent = quotes[currentQuoteIndex];
+        quoteText.style.opacity = '1';
+        quoteText.style.transform = 'translateY(0)';
+    }, 200);
+}
 
     </script>
 </body>

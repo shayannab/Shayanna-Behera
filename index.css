@@ -8,6 +8,12 @@
   flex-direction: column;
 }
 
+#home {
+    position: relative;
+    min-height: 100vh;
+    width: 100%;
+}
+
 html,
 body {
     width: 100%;
@@ -92,7 +98,7 @@ a:hover {
 .header-text .p1{
     position: relative;
     font-family: "Inter", sans-serif;
-    font-size: 2vw;
+    font-size: 1.5vw;
     color:#ffffff;
     line-height: 1.125;
     font-weight: 600;
@@ -222,7 +228,6 @@ a:hover {
     justify-content: flex-end;
     align-items: center;
     padding: 2rem 3vw;
-    /* or fixed if you want it always visible */
     top: 0;
     left: 0;
     z-index: 1000;
@@ -350,15 +355,15 @@ a:hover {
   display: flex;
   justify-content: center;
   align-items: center;
-  perspective: 1000px; /* KEY: this creates the 3D view */
+  perspective: 1000px;
   overflow: hidden;
 }
 
 .slider {
-  width: 160px;      /* was 200px */
+  width: 160px;
   height: 200px;
   position: relative;
-  transform-style: preserve-3d; /* enables child transforms */
+  transform-style: preserve-3d;
   animation: rotateSlider 20s linear infinite;
 }
 
@@ -515,7 +520,139 @@ footer p{
     font-family: "Inter", sans-serif;
     color: #ffffff;
 }
-/* 🌍 Global - All screen sizes */
+
+/* Open to Work Badge */
+.work-badge {
+    position: absolute;
+    top: 12.5rem;
+    right: 10rem;
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+    background: rgba(20, 20, 20, 0.9);
+    backdrop-filter: blur(10px);
+    padding: 0.4rem 0.9rem;
+    border-radius: 50px;
+    border: 1px solid rgba(34, 197, 94, 0.3);
+    z-index: 1000;
+    opacity: 0;
+}
+
+/* Glowing green dot */
+.status-dot {
+    position: relative;
+    width: 6px;
+    height: 6px;
+    background: #22c55e;
+    border-radius: 50%;
+    flex-shrink: 0;
+    animation: dotGlow 2s ease-in-out infinite;
+}
+
+/* Pulsing ring around dot */
+.status-dot::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 6px;
+    height: 6px;
+    background: #22c55e;
+    border-radius: 50%;
+    animation: dotPulse 2s ease-in-out infinite;
+}
+
+/* Outer glow ring */
+.status-dot::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 14px;
+    height: 14px;
+    border: 1.5px solid rgba(34, 197, 94, 0.3);
+    border-radius: 50%;
+    animation: dotRipple 2s ease-in-out infinite;
+}
+
+@keyframes dotGlow {
+    0%, 100% {
+        box-shadow: 0 0 6px #22c55e, 0 0 12px #22c55e;
+    }
+    50% {
+        box-shadow: 0 0 12px #22c55e, 0 0 18px #22c55e, 0 0 24px #22c55e;
+    }
+}
+
+@keyframes dotPulse {
+    0%, 100% {
+        opacity: 1;
+        transform: translate(-50%, -50%) scale(1);
+    }
+    50% {
+        opacity: 0;
+        transform: translate(-50%, -50%) scale(2);
+    }
+}
+
+@keyframes dotRipple {
+    0% {
+        opacity: 1;
+        transform: translate(-50%, -50%) scale(1);
+    }
+    100% {
+        opacity: 0;
+        transform: translate(-50%, -50%) scale(2.5);
+    }
+}
+
+/* Typewriter text */
+.work-text {
+    font-family: 'Inter', sans-serif;
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: #ffffff;
+    white-space: nowrap;
+    overflow: hidden;
+    border-right: 1.5px solid #22c55e;
+    width: 0;
+    animation: typing 2s steps(14) 7s forwards, blink 0.75s step-end infinite 7s;
+}
+
+@keyframes typing {
+    from {
+        width: 0;
+    }
+    to {
+        width: 90px;
+    }
+}
+
+@keyframes blink {
+    50% {
+        border-color: transparent;
+    }
+}
+
+/* Remove cursor after typing */
+.work-text.typed {
+    border-right: none;
+}
+
+/* Hover effect */
+.work-badge:hover {
+    transform: scale(1.05);
+    border-color: rgba(34, 197, 94, 0.6);
+    background: rgba(20, 20, 20, 0.95);
+    transition: all 0.3s ease;
+}
+
+.work-badge:hover .status-dot {
+    animation: glow 1s ease-in-out infinite;
+}
+/* Skills section */
 .skill-reveal-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
@@ -530,11 +667,10 @@ footer p{
   color: #fff;
   border: 1px solid rgba(255, 255, 255, 0.1);
   box-shadow: 0 4px 20px rgba(255, 255, 255, 0.03);
-    cursor: pointer;
-  height: 60px; /* collapsed */
+  cursor: pointer;
+  height: 60px;
   position: relative;
   transition: max-height 0.4s ease, background 0.3s, box-shadow 0.3s;
-
   overflow: hidden
 }
 
@@ -550,7 +686,7 @@ footer p{
 .skill-arrow {
   color: #FF6B2D;
   font-size: 1.1rem;
-transition: transform 0.4s ease;
+  transition: transform 0.4s ease;
 }
 
 .skill-details {
@@ -561,14 +697,15 @@ transition: transform 0.4s ease;
   transition: all 0.3s ease;
   margin-top: 0.5rem;
   color: rgba(255, 255, 255, 0.85);
-  font-size: 1.2vw;
-  font-family: "Playfair Display", serif;
+  font-size: 1vw;
+  font-family: "Inter", sans-serif;
+  font-weight: 400;
+  line-height: 1.6;
 }
 
-/* 💥 Hover logic works everywhere now */
 .skill-card:hover {
   height: auto;
-   background: rgba(255, 255, 255, 0.08);
+  background: rgba(255, 255, 255, 0.08);
   box-shadow: 0 12px 32px rgba(255, 255, 255, 0.08);
 }
 
@@ -581,6 +718,113 @@ transition: transform 0.4s ease;
 .skill-card:hover .skill-arrow {
   opacity: 0;
   transform: rotate(90deg);
+}
+
+/* Fun stuff section */
+.personal-section {
+    width: 100%;
+    max-width: 1200px;
+    padding: 4rem 2rem;
+    margin: 0 auto;
+}
+
+.section-header {
+    text-align: center;
+    margin-bottom: 4rem;
+}
+
+.section-header p {
+    font-family: 'Inter', sans-serif;
+    font-size: 1.2rem;
+    color: #ffffff;
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+    text-transform: lowercase;
+}
+
+.section-header h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: 4rem;
+    color: #888888;
+}
+
+/* Quote container and card */
+.quote-container {
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+.quote-card {
+    background: linear-gradient(135deg, rgba(255, 107, 45, 0.1), rgba(255, 107, 45, 0.05));
+    border: 1px solid rgba(255, 107, 45, 0.3);
+    border-radius: 20px;
+    padding: 3rem 2.5rem;
+    cursor: pointer;
+    transition: all 0.4s ease;
+    position: relative;
+    overflow: hidden;
+    min-height: 250px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.quote-card::before {
+    content: '"';
+    position: absolute;
+    top: -30px;
+    left: 20px;
+    font-size: 140px;
+    color: rgba(255, 107, 45, 0.1);
+    font-family: 'Playfair Display', serif;
+    line-height: 1;
+}
+
+.quote-card:hover {
+    transform: translateY(-8px);
+    border-color: #FF6B2D;
+    box-shadow: 0 20px 50px rgba(255, 107, 45, 0.25);
+}
+
+.card-label {
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    color: #FF6B2D;
+    font-weight: 700;
+    margin-bottom: 1.5rem;
+}
+
+.quote-text {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.5rem;
+    line-height: 1.7;
+    color: #ffffff;
+    flex-grow: 1;
+    display: flex;
+    align-items: center;
+    position: relative;
+    z-index: 1;
+    transition: all 0.3s ease;
+}
+
+.quote-action {
+    font-size: 0.9rem;
+    color: #888;
+    text-align: right;
+    margin-top: 1.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 0.5rem;
+}
+
+.arrow {
+    transition: transform 0.3s ease;
+}
+
+.quote-card:hover .arrow {
+    transform: translateX(5px);
 }
 
 @media screen and (max-width: 768px) {
@@ -616,341 +860,21 @@ transition: transform 0.4s ease;
     font-size: 16vw !important;
   }
 
-}
+  .section-header h2 {
+    font-size: 2.5rem;
+  }
 
- .personal-section {
-            width: 100%;
-            max-width: 1200px;
-            padding: 4rem 2rem;
-        }
-        
-        .section-header {
-            text-align: center;
-            margin-bottom: 3rem;
-        }
-        
-        .section-header p {
-            font-family: 'Inter', sans-serif;
-            font-size: 1.2rem;
-            color: #ffffff;
-            font-weight: 600;
-            margin-bottom: 0.5rem;
-        }
-        
-        .section-header h2 {
-            font-family: 'Playfair Display', serif;
-            font-size: 4rem;
-            color: #888888;
-        }
-        
-        .cards-container {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            gap: 4rem;
-            flex-wrap: wrap;
-            max-width: 1100px;
-            margin: 0 auto;
-            position: relative;
-        }
-        
-        .cards-container::before {
-            content: '';
-            position: absolute;
-            left: 50%;
-            top: 50%;
-            transform: translate(-50%, -50%);
-            width: 2px;
-            height: 60%;
-            background: linear-gradient(to bottom, transparent, #FF6B2D 20%, #FF6B2D 80%, transparent);
-            opacity: 0.3;
-        }
-        
-        /* Quote Card - Ticket Style */
-        .quote-card-wrapper {
-            perspective: 1000px;
-            position: relative;
-            height: 240px;
-            width: 450px;
-            flex-shrink: 0;
-        }
-        
-        .quote-card-inner {
-            position: relative;
-            width: 100%;
-            height: 100%;
-            transition: transform 0.6s;
-            transform-style: preserve-3d;
-        }
-        
-        .quote-card-wrapper.flipped .quote-card-inner {
-            transform: rotateY(180deg);
-        }
-        
-        .quote-card-front,
-        .quote-card-back {
-            position: absolute;
-            width: 100%;
-            height: 100%;
-            backface-visibility: hidden;
-            cursor: pointer;
-        }
-        
-        .quote-card-back {
-            transform: rotateY(180deg);
-        }
-        
-        /* Ticket shape */
-        .ticket-card {
-            position: relative;
-            width: 100%;
-            height: 100%;
-            background: #2f2f2f;
-            border: 3px solid #FF6B2D;
-            clip-path: polygon(
-                0 0,
-                100% 0,
-                100% 8%,
-                98% 10%,
-                100% 12%,
-                100% 20%,
-                98% 22%,
-                100% 24%,
-                100% 32%,
-                98% 34%,
-                100% 36%,
-                100% 44%,
-                98% 46%,
-                100% 48%,
-                100% 56%,
-                98% 58%,
-                100% 60%,
-                100% 68%,
-                98% 70%,
-                100% 72%,
-                100% 80%,
-                98% 82%,
-                100% 84%,
-                100% 92%,
-                98% 94%,
-                100% 96%,
-                100% 100%,
-                0 100%
-            );
-            padding: 2rem 1.5rem;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            box-shadow: 4px 4px 0px rgba(255, 107, 45, 0.2);
-        }
-        
-        .ticket-number {
-            position: absolute;
-            top: 1rem;
-            right: 1.2rem;
-            font-family: 'Inter', sans-serif;
-            font-size: 0.7rem;
-            color: #FF6B2D;
-            font-weight: 600;
-        }
-        
-        .ticket-card:hover {
-            transform: translateY(-4px);
-            box-shadow: 6px 6px 0px rgba(255, 107, 45, 0.3);
-        }
-        
-        /* Blob card for dad jokes */
-        .blob-stack {
-            position: relative;
-            width: 100%;
-            height: 100%;
-        }
-        
-        .blob-layer {
-            position: absolute;
-            width: 100%;
-            height: 100%;
-            background: #1a1a1a;
-            transition: transform 0.3s ease;
-        }
-        
-        .blob-layer-1 {
-            border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%;
-            transform: rotate(0deg);
-            z-index: 1;
-        }
-        
-        .blob-layer-2 {
-            border-radius: 30% 60% 70% 40% / 50% 60% 30% 60%;
-            transform: rotate(0deg) translate(8px, 8px);
-            background: #2a2a2a;
-            z-index: 2;
-        }
-        
-        .blob-layer-3 {
-            border-radius: 40% 60% 60% 40% / 60% 40% 60% 40%;
-            transform: rotate(0deg) translate(16px, 16px);
-            background: #2f2f2f;
-            border: 3px solid #FF6B2D;
-            z-index: 3;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            padding: 1.5rem;
-        }
-        
-        .blob-stack:hover .blob-layer-1 {
-            transform: rotate(-3deg) translate(-4px, -4px);
-        }
-        
-        .blob-stack:hover .blob-layer-2 {
-            transform: rotate(2deg) translate(12px, 4px);
-        }
-        
-        .blob-stack:hover .blob-layer-3 {
-            transform: rotate(-2deg) translate(20px, 20px);
-        }
-        
-        .card-content {
-            position: relative;
-            z-index: 10;
-            color: #fff;
-            text-align: center;
-        }
-        
-        .card-title {
-            font-family: 'Inter', sans-serif;
-            font-size: 0.85rem;
-            font-weight: 700;
-            color: #FF6B2D;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            margin-bottom: 0.6rem;
-        }
-        
-        .quote-text {
-            font-family: 'Playfair Display', serif;
-            font-size: 0.85rem;
-            color: #ffffff;
-            line-height: 1.4;
-            margin-bottom: 0.5rem;
-        }
-        
-        .quote-placeholder {
-            font-family: 'Playfair Display', serif;
-            font-size: 0.8rem;
-            color: #ffffff;
-            line-height: 1.4;
-        }
-        
-        .flip-hint {
-            font-family: 'Inter', sans-serif;
-            font-size: 0.65rem;
-            color: #888888;
-            margin-top: 0.5rem;
-        }
-        
-        /* Bottle Card Stack */
-        .bottle-card-wrapper {
-            position: relative;
-            height: 280px;
-            width: 260px;
-            flex-shrink: 0;
-            display: flex;
-            align-items: center;
-        }
-        
-        .bottle-blob-1 {
-            border-radius: 50% 40% 60% 40% / 40% 50% 60% 50%;
-            transform: rotate(4deg);
-        }
-        
-        .bottle-blob-2 {
-            border-radius: 60% 50% 40% 60% / 50% 40% 50% 60%;
-            transform: rotate(-3deg) translate(8px, 8px);
-        }
-        
-        .bottle-blob-3 {
-            border-radius: 45% 55% 50% 50% / 55% 45% 55% 45%;
-            transform: rotate(2deg) translate(16px, 16px);
-        }
-        
-        .bottle-card-wrapper:hover .bottle-blob-1 {
-            transform: rotate(7deg) translate(-4px, -4px);
-        }
-        
-        .bottle-card-wrapper:hover .bottle-blob-2 {
-            transform: rotate(-5deg) translate(12px, 4px);
-        }
-        
-        .bottle-card-wrapper:hover .bottle-blob-3 {
-            transform: rotate(4deg) translate(20px, 20px);
-        }
-        
-        .bottle {
-            width: 70px;
-            height: 90px;
-            margin: 0.8rem auto;
-            cursor: pointer;
-            transition: transform 0.3s ease;
-        }
-        
-        .bottle:hover {
-            transform: scale(1.15) rotate(-8deg);
-        }
-        
-        .bottle svg {
-            width: 100%;
-            height: 100%;
-            fill: none;
-            stroke: #FF6B2D;
-            stroke-width: 3;
-        }
-        
-        .joke-text {
-            font-family: 'Inter', sans-serif;
-            font-size: 0.85rem;
-            color: #ffffff;
-            line-height: 1.4;
-            margin-top: 0.8rem;
-            transition: opacity 0.2s ease;
-        }
-        
-        .click-hint {
-            font-family: 'Inter', sans-serif;
-            font-size: 0.75rem;
-            color: #888888;
-            margin-top: 0.5rem;
-        }
-        
-        @media screen and (max-width: 768px) {
-            .section-header h2 {
-                font-size: 2.5rem;
-            }
-            
-            .cards-container {
-                flex-direction: column;
-                align-items: center;
-                gap: 3rem;
-            }
-            
-            .cards-container::before {
-                display: none;
-            }
-            
-            .quote-card-wrapper,
-            .bottle-card-wrapper {
-                height: 280px;
-            }
-            
-            .quote-card-wrapper {
-                width: 400px;
-                height: 220px;
-            }
-            
-            .bottle-card-wrapper {
-                width: 220px;
-            }
-        }
+  .quote-card {
+    padding: 2rem 1.5rem;
+    min-height: 250px;
+  }
+
+  .quote-text {
+    font-size: 1.2rem;
+  }
+
+  .quote-card::before {
+    font-size: 100px;
+    top: -20px;
+  }
+}
