@@ -797,7 +797,7 @@ footer p{
   transition: all 0.3s ease;
   margin-top: 0.5rem;
   color: rgba(255, 255, 255, 0.85);
-  font-size: 1vw;
+  font-size: 1.3vw;
   font-family: "Playfair Display", serif;
   font-weight: 400;
   line-height: 1.6;
@@ -850,7 +850,7 @@ footer p{
 
 /* Quote container and card */
 .quote-container {
-    max-width: 800px;
+    max-width: 600px;
     margin: 0 auto;
 }
 
@@ -863,7 +863,8 @@ footer p{
     transition: all 0.4s ease;
     position: relative;
     overflow: hidden;
-    min-height: 300px;
+    max-height: 300px;
+    min-height:200px;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
@@ -978,3 +979,18 @@ footer p{
     top: -20px;
   }
 }
+.section-text p{
+  font-family: 'Inter', sans-serif;
+    font-size: 1.2rem;
+    color: #ffffff;
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+    text-transform: lowercase;
+    position:relative;
+}
+
+/* Center the "explore my" text above skills */
+.section-text {
+  text-align: center;
+}
+
