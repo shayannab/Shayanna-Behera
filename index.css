@@ -8,12 +8,6 @@
   flex-direction: column;
 }
 
-#home {
-    position: relative;
-    min-height: 100vh;
-    width: 100%;
-}
-
 html,
 body {
     width: 100%;
@@ -98,7 +92,7 @@ a:hover {
 .header-text .p1{
     position: relative;
     font-family: "Inter", sans-serif;
-    font-size: 1.5vw;
+    font-size: 2vw;
     color:#ffffff;
     line-height: 1.125;
     font-weight: 600;
@@ -373,6 +367,7 @@ a:hover {
   height: 100%;
   transform: rotateY(calc((var(--position) - 1) * (360deg / var(--quantity))))
               translateZ(400px);
+  cursor: pointer;
 }
 
 .item img {
@@ -380,13 +375,92 @@ a:hover {
   height: 100%;
   object-fit: cover;
   border-radius: 10px;
-  transition: transform 0.4s ease, box-shadow 0.3s ease;
+  transition: transform 0.4s ease, box-shadow 0.3s ease, filter 0.3s ease;
 }
 
 .item:hover img {
   transform: scale(1.05);
   box-shadow: 0 10px 25px rgba(255, 255, 255, 0.08);
-  filter: brightness(1.1) contrast(1.05);
+  filter: brightness(0.7);
+}
+
+/* Project overlay on hover */
+.project-overlay {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: linear-gradient(to top, rgba(0,0,0,0.9), transparent);
+  padding: 1.5rem;
+  transform: translateY(100%);
+  transition: transform 0.4s ease;
+  border-radius: 0 0 10px 10px;
+}
+
+.item:hover .project-overlay {
+  transform: translateY(0);
+}
+
+.project-overlay h3 {
+  font-family: "Playfair Display", serif;
+  font-size: 1.5rem;
+  color: #FF6B2D;
+  margin-bottom: 0.25rem;
+}
+
+.project-overlay p {
+  font-family: "Inter", sans-serif;
+  font-size: 0.9rem;
+  color: #ffffff;
+}
+
+/* View More Card */
+.view-more-card {
+  background: linear-gradient(135deg, rgba(255, 107, 45, 0.15), rgba(255, 107, 45, 0.05));
+  border: 2px dashed rgba(255, 107, 45, 0.4);
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.4s ease;
+}
+
+.view-more-card:hover {
+  background: linear-gradient(135deg, rgba(255, 107, 45, 0.25), rgba(255, 107, 45, 0.1));
+  border-color: #FF6B2D;
+  box-shadow: 0 10px 30px rgba(255, 107, 45, 0.3);
+  transform: scale(1.05);
+}
+
+.view-more-content {
+  text-align: center;
+  padding: 2rem;
+}
+
+.view-more-icon {
+  font-size: 4rem;
+  color: #FF6B2D;
+  font-weight: 300;
+  line-height: 1;
+  margin-bottom: 1rem;
+  transition: transform 0.3s ease;
+}
+
+.view-more-card:hover .view-more-icon {
+  transform: rotate(90deg);
+}
+
+.view-more-content h3 {
+  font-family: "Playfair Display", serif;
+  font-size: 1.8rem;
+  color: #ffffff;
+  margin-bottom: 0.5rem;
+}
+
+.view-more-content p {
+  font-family: "Inter", sans-serif;
+  font-size: 1rem;
+  color: #888888;
 }
 
 
@@ -525,8 +599,8 @@ footer p{
 .work-badge {
     position: relative;
     top: 0;
-    right: 0;
-    margin: 0 auto 24px auto;
+    right: 18rem;
+    margin: 0 0 0 auto;
     display: flex;
     align-items: center;
     gap: 10px;
@@ -541,11 +615,17 @@ footer p{
     z-index: 10;
 }
 
+@keyframes fadeInBadge {
+    to {
+        opacity: 1;
+    }
+}
+
 /* Glowing green dot */
 .status-dot {
     position: relative;
-    width: 6px;
-    height: 6px;
+    width: 10px;
+    height: 10px;
     background: #22c55e;
     border-radius: 50%;
     flex-shrink: 0;
@@ -559,8 +639,8 @@ footer p{
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    width: 6px;
-    height: 6px;
+    width: 10px;
+    height: 10px;
     background: #22c55e;
     border-radius: 50%;
     animation: dotPulse 2s ease-in-out infinite;
@@ -573,19 +653,19 @@ footer p{
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    width: 14px;
-    height: 14px;
-    border: 1.5px solid rgba(34, 197, 94, 0.3);
+    width: 20px;
+    height: 20px;
+    border: 2px solid rgba(34, 197, 94, 0.3);
     border-radius: 50%;
     animation: dotRipple 2s ease-in-out infinite;
 }
 
 @keyframes dotGlow {
     0%, 100% {
-        box-shadow: 0 0 6px #22c55e, 0 0 12px #22c55e;
+        box-shadow: 0 0 10px #22c55e, 0 0 20px #22c55e;
     }
     50% {
-        box-shadow: 0 0 12px #22c55e, 0 0 18px #22c55e, 0 0 24px #22c55e;
+        box-shadow: 0 0 20px #22c55e, 0 0 30px #22c55e, 0 0 40px #22c55e;
     }
 }
 
@@ -614,12 +694,12 @@ footer p{
 /* Typewriter text */
 .work-text {
     font-family: 'Inter', sans-serif;
-    font-size: 0.8rem;
+    font-size: 0.95rem;
     font-weight: 600;
     color: #ffffff;
     white-space: nowrap;
     overflow: hidden;
-    border-right: 1.5px solid #22c55e;
+    border-right: 2px solid #22c55e;
     width: 0;
     animation: typing 2s steps(14) 7s forwards, blink 0.75s step-end infinite 7s;
 }
@@ -629,7 +709,7 @@ footer p{
         width: 0;
     }
     to {
-        width: 90px;
+        width: 130px;
     }
 }
 
@@ -653,7 +733,23 @@ footer p{
 }
 
 .work-badge:hover .status-dot {
-    animation: glow 1s ease-in-out infinite;
+    animation: dotGlow 1s ease-in-out infinite;
+}
+
+/* Open to Work Badge - Positioned next to "Hey, I'm" */
+.header-top-line {
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+    margin-bottom: 0;
+}
+
+
+
+@keyframes fadeInBadge {
+    to {
+        opacity: 1;
+    }
 }
 /* Skills section */
 .skill-reveal-grid {
@@ -661,6 +757,7 @@ footer p{
   grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
   gap: 1.5rem;
   margin-top: 2rem;
+  padding: 0 2rem;
 }
 
 .skill-card {
@@ -701,7 +798,7 @@ footer p{
   margin-top: 0.5rem;
   color: rgba(255, 255, 255, 0.85);
   font-size: 1vw;
- font-family: "Playfair Display", serif;
+  font-family: "Playfair Display", serif;
   font-weight: 400;
   line-height: 1.6;
 }
@@ -753,7 +850,7 @@ footer p{
 
 /* Quote container and card */
 .quote-container {
-    max-width: 600px;
+    max-width: 800px;
     margin: 0 auto;
 }
 
@@ -766,7 +863,7 @@ footer p{
     transition: all 0.4s ease;
     position: relative;
     overflow: hidden;
-    min-height: 250px;
+    min-height: 300px;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
@@ -809,27 +906,6 @@ footer p{
     position: relative;
     z-index: 1;
     transition: all 0.3s ease;
-}
-
-.quote-text.special {
-  color: #FF6B2D;
-  text-shadow: 0 0 20px #FF6B2D, 0 0 40px #fff;
-  animation: bounceGlow 1.2s cubic-bezier(.36,.07,.19,.97) both, specialColor 2s linear infinite;
-}
-
-@keyframes bounceGlow {
-  0% { transform: scale(1) translateY(0); }
-  20% { transform: scale(1.1) translateY(-10px); }
-  40% { transform: scale(0.95) translateY(0); }
-  60% { transform: scale(1.05) translateY(-5px); }
-  80% { transform: scale(1) translateY(0); }
-  100% { transform: scale(1) translateY(0); }
-}
-
-@keyframes specialColor {
-  0% { color: #FF6B2D; }
-  50% { color: #fff; }
-  100% { color: #FF6B2D; }
 }
 
 .quote-action {
@@ -901,59 +977,4 @@ footer p{
     font-size: 100px;
     top: -20px;
   }
-
-  /* Skills section mobile responsive */
-  .skill-reveal-grid {
-    grid-template-columns: 1fr;
-    gap: 1rem;
-    padding: 0 1rem;
-  }
-
-  .skill-card {
-    padding: 1rem 1.2rem;
-  }
-
-  .skill-title {
-    font-size: 5vw;
-  }
-
-  .skill-details {
-    font-size: 3.5vw;
-  }
-
-  .skill-arrow {
-    font-size: 1rem;
-  }
-}
-
-#skills {
-  margin-top: 100px;
-  margin-bottom: 100px;
-}
-
-.work-badge {
-  position: relative;
-  top: 0;
-  right: 0;
-  margin: 0 auto 24px auto;
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  background: rgba(255, 255, 255, 0.05);
-  border-radius: 20px;
-  padding: 8px 22px 8px 12px;
-  font-size: 1.1rem;
-  font-family: "Inter", sans-serif;
-  font-weight: 500;
-  color: #FF6B2D;
-  box-shadow: 0 2px 12px rgba(255, 107, 53, 0.08);
-  z-index: 10;
-}
-
-.section-text .tagline {
-  font-size: 2.2vw;
-  color: #FF6B2D;
-  font-family: "Inter", sans-serif;
-  font-weight: 700;
-  margin-bottom: 1vw;
 }

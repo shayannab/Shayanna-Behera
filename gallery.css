@@ -141,27 +141,23 @@ body {
 
 /* Project Grid - FIXED */
 .projects-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
-    gap: 40px;
-    margin-bottom: 80px;
-    max-width: 1400px;
-    margin-left: auto;
-    margin-right: auto;
-}
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+            gap: 40px;
+            margin-bottom: 80px;
+        }
 
-.project-card {
-    background: rgba(255, 255, 255, 0.02);
-    border: 1px solid #222;
-    border-radius: 16px;
-    overflow: hidden;
-    transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-    position: relative;
-    opacity: 0;
-    transform: translateY(30px);
-    max-width: 350px;
-    justify-self: center;
-}
+        .project-card {
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid #222;
+            border-radius: 16px;
+            overflow: hidden;
+            transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            position: relative;
+            opacity: 0;
+            transform: translateY(30px);
+        }
+
 
 .project-card.show {
     opacity: 1;
