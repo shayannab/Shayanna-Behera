@@ -1,0 +1,494 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Say Hi</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #000;
+            color: #fff;
+            overflow-x: hidden;
+        }
+
+        .container {
+            min-height: 100vh;
+        }
+
+        /* Spline Section */
+        .spline-section {
+            width: 100%;
+            height: 70vh;
+            min-height: 500px;
+            position: relative;
+        }
+
+        spline-viewer {
+            width: 100%;
+            height: 100vh;
+        }
+
+        .watermark-note {
+            text-align: right;
+            padding: 8rem 2rem 6rem;
+            font-size: 0.9rem;
+            color: rgba(255, 255, 255, 0.4);
+            font-style: italic;
+        }
+
+        /* Currently Dashboard */
+        .dashboard-section {
+            padding: 4rem 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .dashboard-title {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(2rem, 4vw, 3rem);
+            font-weight: 600;
+            margin-bottom: 3rem;
+            text-align: center;
+            color: #fff;
+        }
+
+        .dashboard-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .dashboard-card {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 16px;
+            padding: 2rem;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .dashboard-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: linear-gradient(90deg, #FF6B2D, transparent);
+            transform: scaleX(0);
+            transform-origin: left;
+            transition: transform 0.3s ease;
+        }
+
+        .dashboard-card:hover {
+            background: rgba(255, 255, 255, 0.05);
+            border-color: rgba(255, 107, 45, 0.3);
+            transform: translateY(-5px);
+        }
+
+        .dashboard-card:hover::before {
+            transform: scaleX(1);
+        }
+
+        .card-label {
+            font-size: 0.875rem;
+            color: rgba(255, 255, 255, 0.5);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 1rem;
+            font-weight: 500;
+        }
+
+        .card-value {
+            font-size: clamp(1.5rem, 3vw, 2rem);
+            font-weight: 600;
+            color: #fff;
+            margin-bottom: 0.5rem;
+            font-family: 'Inter', sans-serif;
+        }
+
+        .card-value.time {
+            font-family: 'Courier New', monospace;
+            color: #FF6B2D;
+        }
+
+        .card-subtext {
+            font-size: 0.95rem;
+            color: rgba(255, 255, 255, 0.6);
+            line-height: 1.5;
+        }
+
+        .status-indicator {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .status-dot {
+            width: 10px;
+            height: 10px;
+            background: #00ff88;
+            border-radius: 50%;
+            animation: pulse 2s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
+        }
+
+        .tech-stack {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-top: 1rem;
+        }
+
+        .tech-tag {
+            background: rgba(255, 107, 45, 0.1);
+            border: 1px solid rgba(255, 107, 45, 0.3);
+            padding: 0.4rem 0.8rem;
+            border-radius: 6px;
+            font-size: 0.85rem;
+            color: #FF6B2D;
+            transition: all 0.2s ease;
+        }
+
+        .tech-tag:hover {
+            background: rgba(255, 107, 45, 0.2);
+            transform: translateY(-2px);
+        }
+
+        /* Meme Wall Section */
+        .meme-section {
+            padding: 4rem 2rem;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .meme-title {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(2rem, 4vw, 3rem);
+            font-weight: 600;
+            margin-bottom: 3rem;
+            text-align: center;
+            color: #fff;
+        }
+
+        .meme-grid {
+            column-count: 4;
+            column-gap: 1.5rem;
+        }
+
+        .meme-item {
+            break-inside: avoid;
+            margin-bottom: 1.5rem;
+            position: relative;
+            cursor: pointer;
+            transition: transform 0.3s ease, z-index 0s 0s;
+        }
+
+        .meme-item:hover {
+            transform: scale(1.5);
+            z-index: 100;
+            transition: transform 0.3s ease, z-index 0s 0s;
+        }
+
+        .meme-image {
+            width: 100%;
+            height: auto;
+            display: block;
+            border-radius: 12px;
+            background: linear-gradient(135deg, rgba(255, 107, 45, 0.2), rgba(255, 255, 255, 0.1));
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: all 0.3s ease;
+            object-fit: cover;
+        }
+
+        .meme-item:hover .meme-image {
+            box-shadow: 0 20px 60px rgba(255, 107, 45, 0.4);
+            border-color: rgba(255, 107, 45, 0.5);
+        }
+
+        /* Placeholder styling */
+        .meme-placeholder {
+            width: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 12px;
+            background: linear-gradient(135deg, rgba(255, 107, 45, 0.15), rgba(255, 255, 255, 0.05));
+            border: 2px dashed rgba(255, 107, 45, 0.3);
+            color: rgba(255, 255, 255, 0.4);
+            font-size: 0.9rem;
+            text-align: center;
+            padding: 1rem;
+            transition: all 0.3s ease;
+        }
+
+        .meme-item:hover .meme-placeholder {
+            background: linear-gradient(135deg, rgba(255, 107, 45, 0.25), rgba(255, 255, 255, 0.1));
+            border-color: rgba(255, 107, 45, 0.6);
+            color: rgba(255, 255, 255, 0.7);
+        }
+
+        /* Responsive */
+        @media (max-width: 1024px) {
+            .meme-grid {
+                column-count: 3;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .spline-section {
+                height: 60vh;
+                min-height: 400px;
+            }
+
+            .dashboard-section {
+                padding: 3rem 1.5rem;
+            }
+
+            .dashboard-grid {
+                grid-template-columns: 1fr;
+                gap: 1.25rem;
+            }
+
+            .dashboard-card {
+                padding: 1.5rem;
+            }
+
+            .meme-section {
+                padding: 3rem 1.5rem;
+            }
+
+            .meme-grid {
+                column-count: 2;
+                column-gap: 1rem;
+            }
+
+            .meme-item {
+                margin-bottom: 1rem;
+            }
+
+            .meme-item:hover {
+                transform: scale(1.3);
+            }
+        }
+
+        @media (max-width: 480px) {
+            .spline-section {
+                height: 50vh;
+                min-height: 350px;
+            }
+
+            .dashboard-section {
+                padding: 2rem 1rem;
+            }
+
+            .meme-section {
+                padding: 2rem 1rem;
+            }
+
+            .meme-grid {
+                column-count: 1;
+            }
+
+            .meme-item:hover {
+                transform: scale(1.2);
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Back to home link (top-left). Update href if your home path differs -->
+    <a class="back-home" href="./index.html">← Back to home</a>
+    <style>
+        .back-home {
+            position: fixed;
+            top: 18px;
+            left: 18px;
+            z-index: 1002;
+            background: rgba(15, 15, 15, 0.8);
+            color: #ffffff;
+            padding: 8px 12px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 600;
+            border: 1px solid rgba(255, 107, 45, 0.12);
+            transition: transform 0.12s ease, background 0.12s ease;
+        }
+        .back-home:hover {
+            transform: translateY(-2px);
+            background: rgba(255, 107, 45, 0.12);
+            color: #fff;
+        }
+        @media (max-width: 480px) {
+            .back-home { top: 12px; left: 12px; padding: 6px 10px; font-size: 0.9rem; }
+        }
+    </style>
+    <div class="container">
+        <!-- Spline Interactive Section -->
+        <div class="spline-section">
+            <script type="module" src="https://unpkg.com/@splinetool/viewer@1.10.86/build/spline-viewer.js"></script>
+            <spline-viewer url="https://prod.spline.design/ax7HMy-j5NLbXgnL/scene.splinecode"></spline-viewer>
+        </div>
+        
+        <div class="watermark-note">
+            *yea it's a watermark, close your eyes; now scroll down
+        </div>
+
+        <!-- Currently Dashboard -->
+        <div class="dashboard-section">
+            <h2 class="dashboard-title">Currently</h2>
+            
+            <div class="dashboard-grid">
+                <!-- Time Card -->
+                <div class="dashboard-card">
+                    <div class="card-label">time</div>
+                    <div class="card-value time" id="current-time">00:00:00</div>
+                    <div class="card-subtext"> India (IST)</div>
+                </div>
+
+                <!-- Status Card -->
+                <div class="dashboard-card">
+                    <div class="card-label">stat</div>
+                    <div class="card-value">
+                        <div class="status-indicator">
+                            <span class="status-dot"></span>
+                            <span>Available</span>
+                        </div>
+                    </div>
+                    <div class="card-subtext">Open for exciting projects and collaborations</div>
+                </div>
+
+                <!-- Tech Stack Card -->
+                <div class="dashboard-card">
+                    <div class="card-label">i like working in</div>
+                    <div class="card-value">areas like</div>
+                    <div class="tech-stack">
+                        <span class="tech-tag">frontend</span>
+                        <span class="tech-tag">backend</span>
+                        <span class="tech-tag">AI</span>
+                        <span class="tech-tag">ML</span>
+                        <span class="tech-tag">design</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Meme Wall Section -->
+        <div class="meme-section">
+            <h2 class="meme-title">Pins (have a laugh folks)</h2>
+            
+            <div class="meme-grid">
+                <!-- Example: Replace placeholder with image URL -->
+                <!-- Step 1: Go to Pinterest/Google Images -->
+                <!-- Step 2: Right-click image → "Copy image address" -->
+                <!-- Step 3: Replace the placeholder div with: -->
+                <!-- <img src="PASTE_YOUR_IMAGE_URL_HERE" alt="meme" class="meme-image"> -->
+                
+                <!-- Meme 1: Square -->
+                <div class="meme-item">
+                    <div class="meme-placeholder" style="height: 300px;">
+                       <img src="https://i.pinimg.com/736x/43/a8/d8/43a8d81969dfd1b5f320e4e4e37c611e.jpg" alt="meme" class="meme-image">
+                    </div>
+                </div>
+
+                <!-- Meme 2: Portrait Tall -->
+                <div class="meme-item">
+                    <div class="meme-placeholder" style="height: 450px;">
+                                         <img src="https://i.pinimg.com/736x/1f/35/2f/1f352fb7e0dfd5394e75c7476f39a798.jpg" alt="meme" class="meme-image">
+                    </div>
+                </div>
+
+                <!-- Meme 3: Landscape -->
+                <div class="meme-item">
+                    <div class="meme-placeholder" style="height: 200px;">
+                        <img src="https://i.pinimg.com/736x/e2/45/4e/e2454e8d228cd85c90bb75a6d400658f.jpg" alt="meme" class="meme-image">
+                    </div>
+                </div>
+
+                <!-- Meme 4: Square -->
+                <div class="meme-item">
+                    <div class="meme-placeholder" style="height: 300px;">
+                        <img src="https://i.pinimg.com/736x/da/7e/9d/da7e9def4ab2e0287854fc050fc3881d.jpg" alt="meme" class="meme-image">
+                    </div>
+                </div>
+
+                <!-- Meme 5: Portrait Medium -->
+                <div class="meme-item">
+                    <div class="meme-placeholder" style="height: 380px;">
+                                         <img src="https://i.pinimg.com/1200x/04/7f/46/047f462ff45bed2b35df55ba52c77d3c.jpg" alt="meme" class="meme-image">
+       
+                    </div>
+                </div>
+
+                <!-- Meme 6: Square -->
+                <div class="meme-item">
+                    <div class="meme-placeholder" style="height: 300px;">
+                       <img src="https://i.pinimg.com/1200x/10/d1/24/10d1244395ae66b7ce2dfe803472b62a.jpg" alt="meme" class="meme-image">
+                    </div>
+                </div>
+
+                <!-- Meme 7: Landscape Wide -->
+                <div class="meme-item">
+                    <div class="meme-placeholder" style="height: 180px;">
+                        <img src="https://i.pinimg.com/736x/22/f8/91/22f8919f495ee1413597fc618208553b.jpg" alt="meme" class="meme-image">
+                    </div>
+                </div>
+
+                <!-- Meme 4: Square -->
+                <div class="meme-item">
+                    <div class="meme-placeholder" style="height: 300px;">
+                        <img src="https://i.pinimg.com/736x/04/53/b0/0453b0bc71ce657378da9be663ced4e7.jpg" alt="meme" class="meme-image">
+                    </div>
+                </div>
+
+
+                <!-- Meme 9: Square -->
+                <div class="meme-item">
+                    <div class="meme-placeholder" style="height: 300px;">
+                        <img src="https://i.pinimg.com/736x/86/a7/7a/86a77a768ede9dc398770f290bbad283.jpg" alt="meme" class="meme-image">
+                    </div>
+                </div>
+
+                <!-- Meme 10: Landscape -->
+                <div class="meme-item">
+                    <div class="meme-placeholder" style="height: 220px;">
+                    <img src="https://i.pinimg.com/736x/a2/75/b5/a275b5fa05ef124e374ccf6c1f005715.jpg" alt="meme" class="meme-image">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Live Clock
+        function updateTime() {
+            const now = new Date();
+            const options = {
+                timeZone: 'Asia/Kolkata',
+                hour: '2-digit',
+                minute: '2-digit',
+                second: '2-digit',
+                hour12: false
+            };
+            const timeString = now.toLocaleTimeString('en-US', options);
+            document.getElementById('current-time').textContent = timeString;
+        }
+
+        updateTime();
+        setInterval(updateTime, 1000);
+    </script>
+</body>
+</html>
