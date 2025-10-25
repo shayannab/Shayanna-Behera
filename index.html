@@ -92,7 +92,7 @@
                 </p>
                 <div>
                     <ul class="links">
-                        <li><a onclick="window.open('./asset/cv.pdf')">resume</a></li>
+                        <li><a href="./assets/Resume-Shayanna Behera.pdf"  download="Shayanna_Behera_Resume.pdf" target="_blank">resume</a></li>
                         <li><a href="./sayhi.html">say hi</a></li>
                     </ul>
                 </div>
@@ -274,76 +274,86 @@
         }
         updateCounter();
     }
-    startLoader();
-    gsap.to(".counter",0.25,{
-        delay:3.5, opacity:0
-    });
+    // Show loader only on first visit in this browser tab. Use sessionStorage to remember.
+    const loaderSeen = sessionStorage.getItem('loaderSeen') === 'true';
 
-    gsap.to(".bar", 1.5,{
-        delay:3.5, height:0, stagger:{
-            amount:0.5,
-        },
-        ease:"power4.inOut",
-    });
+    function runInitialAnimations(skipLoader) {
+        if (!skipLoader) {
+            startLoader();
 
-    gsap.from(".h1",1.5,{
-        delay:4,
-        y:700,
-        stagger:{
-            amount:0.5,
-        },
-        ease:"power4.inOut",
-    });
+            gsap.to(".counter", 0.25, { delay: 3.5, opacity: 0 });
+            gsap.to(".bar", 1.5, {
+                delay: 3.5,
+                height: 0,
+                stagger: { amount: 0.5 },
+                ease: "power4.inOut",
+            });
 
-    gsap.from(".hero", 2,{
-        delay:4.5,y:400,
-        ease:"power4.inOut",
-    });
+            gsap.from(".h1", 1.5, {
+                delay: 4,
+                y: 700,
+                stagger: { amount: 0.5 },
+                ease: "power4.inOut",
+            });
 
-    gsap.to(".loader", {
-    delay: 5.5,
-    opacity: 0,
-    display: "none",
-    onComplete: () => {
-        document.body.style.overflow = "auto";
+            gsap.from(".hero", 2, { delay: 4.5, y: 400, ease: "power4.inOut" });
+
+            gsap.to(".loader", {
+                delay: 5.5,
+                opacity: 0,
+                display: "none",
+                onComplete: () => {
+                    document.body.style.overflow = "auto";
+                    // mark that loader has been shown for this session
+                    sessionStorage.setItem('loaderSeen', 'true');
+                }
+            });
+
+            // Set initial state and animate the Open to Work badge
+            gsap.set(".work-badge", { opacity: 0 });
+            gsap.to(".work-badge", {
+                delay: 7.5,
+                opacity: 1,
+                duration: 0.8,
+                ease: "power2.out"
+            });
+
+            // Remove cursor from work-text after typing completes (keeps original timing)
+            setTimeout(() => {
+                const workText = document.querySelector('.work-text');
+                if (workText) {
+                    workText.classList.add('typed');
+                }
+            }, 9500);
+        } else {
+            // Skip loader: hide loader immediately and run shorter animations
+            const loaderEl = document.querySelector('.loader');
+            if (loaderEl) loaderEl.style.display = 'none';
+            document.body.style.overflow = 'auto';
+
+            gsap.set(".counter", { opacity: 0 });
+            gsap.from(".h1", 1.2, {
+                delay: 0.05,
+                y: 700,
+                stagger: { amount: 0.45 },
+                ease: "power4.inOut",
+            });
+
+            gsap.from(".hero", 1, { delay: 0.1, y: 200, ease: "power4.inOut" });
+
+            gsap.set(".work-badge", { opacity: 0 });
+            gsap.to(".work-badge", { delay: 0.8, opacity: 1, duration: 0.6, ease: "power2.out" });
+
+            // Start typing animation immediately by overriding CSS animation delay
+            const wt = document.querySelector('.work-text');
+            if (wt) {
+                wt.style.animation = 'typing 2s steps(14) 0s forwards, blink 0.75s step-end infinite 0s';
+                setTimeout(() => wt.classList.add('typed'), 2200);
+            }
+        }
     }
-});
 
-// Set initial state and animate the Open to Work badge
-gsap.set(".work-badge", { opacity: 0 });
-gsap.to(".work-badge", {
-    delay: 7.5,
-    opacity: 1,
-    duration: 0.8,
-    ease: "power2.out"
-});
-
-// Hide work badge when scrolling away from home section
-ScrollTrigger.create({
-    trigger: "#home",
-    start: "bottom bottom",
-    end: "bottom top",
-    onEnter: () => {
-        gsap.to(".work-badge", { 
-            opacity: 0, 
-            duration: 0.3 
-        });
-    },
-    onLeaveBack: () => {
-        gsap.to(".work-badge", { 
-            opacity: 1, 
-            duration: 0.3 
-        });
-    }
-});
-
-// Remove cursor from work-text after typing completes
-setTimeout(() => {
-    const workText = document.querySelector('.work-text');
-    if (workText) {
-        workText.classList.add('typed');
-    }
-}, 9500);
+    runInitialAnimations(loaderSeen);
 
 function toggleMenu(){
     const menu= document.querySelector('.menu-links');
