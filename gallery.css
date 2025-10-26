@@ -143,7 +143,8 @@ body {
 .projects-grid {
     display: grid;
     /* smaller min column so narrow screens and single-item filters look better */
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    /* show two cards per row on wider screens */
+    grid-template-columns: repeat(2, 1fr);
     gap: 40px;
     margin-bottom: 80px;
     /* center the grid items horizontally so a single card doesn't stick to the left */
