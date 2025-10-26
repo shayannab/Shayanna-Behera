@@ -994,3 +994,13 @@ footer p{
   text-align: center;
 }
 
+.header-top-line {
+  flex-direction: column;
+  gap: 1rem;
+  align-items: flex-start;
+}
+    
+.work-badge {
+  font-size: 0.9rem;
+  padding: 6px 16px 6px 10px;
+}
