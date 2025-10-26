@@ -311,7 +311,9 @@
                 min-height: 400px;
             }
 
+            /* Hide the watermark note on mobile since the Spline watermark may not appear on small screens */
             .watermark-note {
+                display: none;
                 padding: 1.5rem 1.5rem 2rem;
                 margin-top: -3rem;
                 font-size: 0.85rem;
@@ -361,7 +363,9 @@
                 min-height: 350px;
             }
 
+            /* Ensure watermark note remains hidden on very small screens */
             .watermark-note {
+                display: none;
                 padding: 1rem 1rem 1.5rem;
                 margin-top: -2rem;
                 font-size: 0.8rem;

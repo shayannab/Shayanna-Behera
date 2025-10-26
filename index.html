@@ -112,20 +112,20 @@
   </div>
 
   <div class="skill-reveal-grid">
-    <div class="skill-card">
-      <div class="skill-title">
-        Web <span class="skill-arrow">↗</span>
-      </div>
+        <div class="skill-card">
+            <div class="skill-title">
+                Web <span class="skill-arrow" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M7 17L17 7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path><path d="M7 7H17V17" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path></svg></span>
+            </div>
       <div class="skill-details">
         HTML5, CSS3, JavaScript, TypeScript, React.js, Tailwind CSS, Bootstrap, GSAP, Framer Motion, Spline
       </div>
     </div>
 
 
-    <div class="skill-card">
-      <div class="skill-title">
-        AI/ML <span class="skill-arrow">↗</span>
-      </div>
+        <div class="skill-card">
+            <div class="skill-title">
+                AI/ML <span class="skill-arrow" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M7 17L17 7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path><path d="M7 7H17V17" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path></svg></span>
+            </div>
       <div class="skill-details">
         Python, NumPy, Pandas, Matplotlib, Seaborn, Scikit-Learn, TensorFlow
 
@@ -133,10 +133,10 @@
       </div>
     </div>
 
-    <div class="skill-card">
-      <div class="skill-title">
-        Tools <span class="skill-arrow">↗</span>
-      </div>
+        <div class="skill-card">
+            <div class="skill-title">
+                Tools <span class="skill-arrow" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M7 17L17 7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path><path d="M7 7H17V17" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path></svg></span>
+            </div>
       <div class="skill-details">
         Hosting & Backend: Supabase, Vercel, Netlify, Firebase, Neon, Prisma
         API & Testing: Postman (API Testing), RESTful APIs, Ollama, Grok AI, Plaid, OpenAI
@@ -155,7 +155,7 @@
 
 
     <section id="project">
-        <div class="banner">
+        <div class="banner desktop-carousel ">
             <div class="slider" style="--quantity: 4">
                 <a href="https://promptory-six.vercel.app/" target="_blank" class="item" style="--position:1"><img src="./img/promptoryc.png" alt="project 1" /></a>
                 <a href="https://nitro-x.vercel.app/" target="_blank" class="item" style="--position:2"><img src="./img/nitroxc.png" alt="project 1" /></a>
@@ -167,6 +167,51 @@
                 <h2>web designs & ML projects</h2>
             </div>
         </div>
+
+<!-- Mobile: Sliding Carousel -->
+<div class="mobile-carousel">
+    <div class="mobile-project-header">
+        <p class="mobile-tagline">explore my</p>
+        <h1 class="mobile-title">things I've built<span>.</span></h1>
+        <h2 class="mobile-subtitle">web designs & ML projects</h2>
+    </div>
+    
+    <div class="mobile-slider-wrapper">
+        <div class="mobile-slider-track">
+            <a href="https://promptory-six.vercel.app/" target="_blank" class="mobile-project-card">
+                <div class="mobile-card-image">
+                    <img src="./img/promptoryc.png" alt="Promptory" />
+                </div>
+            </a>
+            
+            <a href="https://nitro-x.vercel.app/" target="_blank" class="mobile-project-card">
+                <div class="mobile-card-image">
+                    <img src="./img/nitroxc.png" alt="NitroX" />
+                </div>
+            </a>
+            
+            <a href="https://zyla-app.vercel.app/" target="_blank" class="mobile-project-card">
+                <div class="mobile-card-image">
+                    <img src="./img/zylac.png" alt="Zyla" />
+                </div>
+            </a>
+            
+            <a href="./gallery.html" target="_blank" class="mobile-project-card mobile-view-more">
+                <div class="mobile-view-more-content">
+                    <span class="mobile-plus">+</span>
+                    <h3>View More</h3>
+                </div>
+            </a>
+        </div>
+    </div>
+    
+    <div class="mobile-dots">
+        <span class="mobile-dot active"></span>
+        <span class="mobile-dot"></span>
+        <span class="mobile-dot"></span>
+        <span class="mobile-dot"></span>
+    </div>
+</div>
     </section>
     
 
@@ -417,6 +462,57 @@ function changeQuote() {
     }, 200);
 }
 
+
+// Mobile Carousel
+const mobileTrack = document.querySelector('.mobile-slider-track');
+const mobileDots = document.querySelectorAll('.mobile-dot');
+const mobileCards = document.querySelectorAll('.mobile-project-card');
+let mobileCurrentSlide = 0;
+
+function updateMobileSlider() {
+    const cardWidth = mobileCards[0].offsetWidth + 24; // 24px gap
+    mobileTrack.style.transform = `translateX(-${mobileCurrentSlide * cardWidth}px)`;
+    
+    mobileDots.forEach((dot, index) => {
+        dot.classList.toggle('active', index === mobileCurrentSlide);
+    });
+}
+
+mobileDots.forEach((dot, index) => {
+    dot.addEventListener('click', () => {
+        mobileCurrentSlide = index;
+        updateMobileSlider();
+    });
+});
+
+// Swipe support
+let mobileStartX = 0;
+let mobileEndX = 0;
+
+if (mobileTrack) {
+    mobileTrack.addEventListener('touchstart', (e) => {
+        mobileStartX = e.changedTouches[0].screenX;
+    });
+
+    mobileTrack.addEventListener('touchend', (e) => {
+        mobileEndX = e.changedTouches[0].screenX;
+        handleMobileSwipe();
+    });
+}
+
+function handleMobileSwipe() {
+    const swipeThreshold = 50;
+    
+    if (mobileStartX - mobileEndX > swipeThreshold && mobileCurrentSlide < mobileCards.length - 1) {
+        mobileCurrentSlide++;
+        updateMobileSlider();
+    }
+    
+    if (mobileEndX - mobileStartX > swipeThreshold && mobileCurrentSlide > 0) {
+        mobileCurrentSlide--;
+        updateMobileSlider();
+    }
+}
     </script>
 </body>
 </html>
