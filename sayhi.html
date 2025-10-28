@@ -88,6 +88,79 @@
             height: 100vh;
         }
 
+        /* Fallback visuals for mobile: video or static image */
+        .spline-wrapper {
+            width: 100%;
+            height: 100%;
+            position: relative;
+        }
+
+        .spline-fallback-video,
+        .spline-fallback-img {
+            display: none;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 12px;
+        }
+
+        /* Inline typewriter for mobile fallback */
+        .typewriter-container {
+            display: none;
+            width: 100%;
+            height: 100%;
+            padding: 1.25rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: left;
+        }
+
+        .typewriter-text {
+            font-size: 1.05rem;
+            line-height: 1.6;
+            font-weight: 300;
+            color: rgba(230,230,230,0.98);
+            max-width: 800px;
+        }
+
+        .typewriter-cursor {
+            display: inline-block;
+            width: 2px;
+            height: 1.2em;
+            background-color: #00ff88;
+            margin-left: 6px;
+            animation: tw-blink 0.7s infinite;
+            vertical-align: text-bottom;
+        }
+
+        @keyframes tw-blink {
+            0%, 49% { opacity: 1; }
+            50%, 100% { opacity: 0; }
+        }
+
+        /* Host where Spline viewer will be injected for desktop */
+        #spline-host {
+            width: 100%;
+            height: 100%;
+        }
+
+        /* Desktop: hide fallback (interactive viewer will be used) */
+        @media (min-width: 769px) {
+            .spline-fallback-video,
+            .spline-fallback-img { display: none !important; }
+            #spline-host { display: block !important; }
+        }
+
+        /* Mobile: hide Spline viewer and show typewriter instead of video/image */
+        @media (max-width: 768px) {
+            #spline-host { display: none !important; }
+            .spline-fallback-video { display: none !important; }
+            .spline-fallback-img { display: none !important; }
+            /* show inline typewriter on phones */
+            .typewriter-container { display: flex !important; }
+        }
+
         .watermark-note {
             text-align: right;
             padding: 2rem 2rem 3rem;
@@ -402,8 +475,27 @@
         <div class="container">
             <!-- Spline Interactive Section -->
             <div class="spline-section">
-                <script type="module" src="https://unpkg.com/@splinetool/viewer@1.10.86/build/spline-viewer.js"></script>
-                <spline-viewer url="https://prod.spline.design/ax7HMy-j5NLbXgnL/scene.splinecode"></spline-viewer>
+                <!-- Desktop: lazy-load the interactive Spline viewer. -->
+                <!-- Mobile: show a lightweight fallback (webm/mp4 or png) to save bandwidth and avoid watermark issues. -->
+                <div class="spline-wrapper">
+                    <div id="spline-host" aria-hidden="false"></div>
+
+                    <!-- Video fallback (preferred) -->
+                    <video class="spline-fallback-video" autoplay muted loop playsinline preload="metadata" poster="./img/spline-fallback.png">
+                        <source src="./img/spline-fallback.webm" type="video/webm">
+                        <source src="./img/spline-fallback.mp4" type="video/mp4">
+                        <!-- If video not supported, the image below will be shown -->
+                    </video>
+
+                    <!-- Static image fallback as a final fallback for very old devices -->
+                    <img class="spline-fallback-img" src="./img/spline-fallback.png" alt="Scene preview" />
+
+                    <!-- Mobile typewriter fallback (replaces spline on small screens) -->
+                    <div class="typewriter-container" id="typewriterContainer" aria-hidden="true">
+                        <p class="typewriter-text" id="typewriterText"></p>
+                        <span id="typewriterCursor" class="typewriter-cursor" aria-hidden="true"></span>
+                    </div>
+                </div>
             </div>
             
             <div class="watermark-note">
@@ -496,6 +588,77 @@
     </div>
 
     <script>
+        // Lazy-load Spline on desktop and show lightweight fallback on mobile
+        function initSplineOrFallback() {
+            const isDesktop = window.innerWidth > 768;
+            const host = document.getElementById('spline-host');
+            const video = document.querySelector('.spline-fallback-video');
+            const img = document.querySelector('.spline-fallback-img');
+
+            if (isDesktop) {
+                // remove/hide fallbacks
+                if (video) video.style.display = 'none';
+                if (img) img.style.display = 'none';
+                // hide typewriter if present
+                const twContainer = document.getElementById('typewriterContainer');
+                if (twContainer) {
+                    twContainer.style.display = 'none';
+                    // reset typewriter state so it can run again if user shrinks viewport
+                    window._typewriterStarted = false;
+                    const twText = document.getElementById('typewriterText');
+                    if (twText) twText.textContent = '';
+                }
+
+                // lazy-load the spline viewer script and insert viewer
+                if (!document.querySelector('script[data-spline-lazy]')) {
+                    const s = document.createElement('script');
+                    s.type = 'module';
+                    s.setAttribute('data-spline-lazy', '1');
+                    s.src = 'https://unpkg.com/@splinetool/viewer@1.10.86/build/spline-viewer.js';
+                    s.onload = () => {
+                        try {
+                            const viewer = document.createElement('spline-viewer');
+                            viewer.setAttribute('url', 'https://prod.spline.design/ax7HMy-j5NLbXgnL/scene.splinecode');
+                            viewer.style.width = '100%';
+                            viewer.style.height = '100%';
+                            host.appendChild(viewer);
+                        } catch (e) {
+                            // fallback to image if viewer can't be created
+                            if (img) img.style.display = 'block';
+                        }
+                    };
+                    document.head.appendChild(s);
+                }
+            } else {
+                // mobile: remove/hide spline viewer if present, and show fallback
+                // remove any previously inserted spline-viewer
+                const existing = host.querySelector('spline-viewer');
+                if (existing) existing.remove();
+
+                // Prefer the inline typewriter on mobile instead of video
+                const twContainer = document.getElementById('typewriterContainer');
+                const twText = document.getElementById('typewriterText');
+                const twCursor = document.getElementById('typewriterCursor');
+
+                if (video) video.style.display = 'none';
+                if (img) img.style.display = 'none';
+
+                if (twContainer) {
+                    twContainer.style.display = 'flex';
+                    // start typing (only once per session unless resized)
+                    if (!window._typewriterStarted) startTypewriter();
+                }
+            }
+        }
+
+        // initialize on load
+        window.addEventListener('load', initSplineOrFallback);
+        // re-evaluate on resize (optional)
+        window.addEventListener('resize', () => {
+            // debounce simple
+            clearTimeout(window._splineResizeTimeout);
+            window._splineResizeTimeout = setTimeout(initSplineOrFallback, 250);
+        });
         // Mobile warning logic
         function proceedAnyway() {
             document.getElementById('mobileWarning').style.display = 'none';
@@ -525,6 +688,31 @@
 
         updateTime();
         setInterval(updateTime, 1000);
+
+        /* Typewriter implementation for mobile fallback */
+        function startTypewriter() {
+            const text = "Hi, welcome! This is the more human side of me. Still a work in progress, but scroll down for the meme wall—grab some motivation, have a laugh, maybe both. When I'm not here, I'm building full-stack apps with React and TypeScript, breaking things at 3am, and occasionally remembering to commit my code. Open to remote opportunities and good coffee recommendations.";
+            const el = document.getElementById('typewriterText');
+            if (!el) return;
+            window._typewriterStarted = true;
+            let index = 0;
+            const typingSpeed = 45;
+
+            function type() {
+                if (index < text.length) {
+                    el.textContent += text.charAt(index);
+                    index++;
+                    window._typewriterTimer = setTimeout(type, typingSpeed);
+                } else {
+                    // add persistent cursor
+                    const cursor = document.getElementById('typewriterCursor');
+                    if (cursor) cursor.style.display = 'inline-block';
+                }
+            }
+
+            // small delay so mobile warning animation completes first
+            setTimeout(type, 400);
+        }
     </script>
 </body>
 </html>
